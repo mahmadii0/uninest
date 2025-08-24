@@ -5,4 +5,5 @@ def register_handlers(bot: telebot):
     @bot.message_handler(commands=['start'])
     def start(message: Message):
         if message.chat.type == "private":
-            userId = message.from_user.id
+            name = message.from_user.first_name
+            bot.send_message(message.chat.id,f'welcome to UniNest {name}!')

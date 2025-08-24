@@ -31,7 +31,7 @@ def dbConnection():
         print('Connection closed')
 
 def createTables():
-    with dbConnection as cursor:
+    with dbConnection() as cursor:
         for table in tables:
             query=tables[table]
             cursor.execute(query)
