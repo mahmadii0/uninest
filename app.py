@@ -35,3 +35,16 @@ def createTables():
         for table in tables:
             query=tables[table]
             cursor.execute(query)
+
+def getGroupIDs():
+    with dbConnection() as cursor:
+        query='SELECT groupID FROM botgroups'
+        cursor.execute(query)
+        list=cursor.fetchall()
+        return list
+
+def addGroup(group):
+    with dbConnection() as cursor:
+        query='INSERT INTO botgroups VALUES(%s,%s,%s)'
+        cursor.execute(query,(group.groupID,group.name,group.lang))
+        return True

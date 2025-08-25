@@ -1,3 +1,9 @@
+class Group:
+    def __init__(self,groupID:int,name:str,lang:str):
+        self.groupID=groupID
+        self.name=name
+        self.lang=lang
+
 class Lecture:
     def __init__(self,lecID,name,phone,rate,pic):
         self.lecID=lecID
