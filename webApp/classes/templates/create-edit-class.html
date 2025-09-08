@@ -1,0 +1,77 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en"Wardrobe malfunction class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if typee == 'add' %}Add Class{% else %}Edit Class{% endif %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../static/create-edit.css">
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md bg-[var(--bg-color)] p-8 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">{% if typee == 'add' %}Add Class{% else %}Edit Class{% endif %}</h2>
+            <button id="toggleMode" class="px-4 py-2 rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+                Toggle Dark Mode
+            </button>
+        </div>
+        <form class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium mb-1">Class Name</label>
+                <input type="text" id="name" placeholder="Enter your class name(max character:100)" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            </div>
+            <div>
+                <label for="Lecture" class="block text-sm font-medium mb-1">Lecture</label>
+                <select id="Lecture" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+                    <option value="" disabled selected>Select a Lecture for class</option>
+                    <option value="user1@example.com">user1@example.com</option>
+                    <option value="user2@example.com">user2@example.com</option>
+                    <option value="user3@example.com">user3@example.com</option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full px-4 py-2 rounded-md font-medium hover:opacity-90">Submit</button>
+        </form>
+    </div>
+    <script src="../static/create-edit.js"></script>
+</body>
+</html>
