@@ -15,9 +15,13 @@ def listen_for_events():
     for message in pubsub.listen():
         if message['type'] == 'message':
             data = json.loads(message['data'])
-            if data['event'] == 'lecture-added':
-                groupID = data['data']['groupID']
-                bot.send_message(groupID, "Lecture successfully added!")
+            match data['event']:
+                case 'lecture-added':
+                    groupID = data['data']['groupID']
+                    bot.send_message(groupID, "Lecture successfully added!")
+                case 'lecture-edited':
+                    groupID = data['data']['groupID']
+                    bot.send_message(groupID, "Lecture successfully edited!")
 
 threading.Thread(target=listen_for_events, daemon=True).start()
 

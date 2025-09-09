@@ -79,9 +79,9 @@ def addLecture(lecture,groupID):
 def getLecture(lecID,groupID):
     with dbConnection() as cursor:
         query='SELECT * FROM lectures WHERE lecID=%s AND groupID=%s'
-        cursor.execute(query,(lecID,))
+        cursor.execute(query,(lecID,groupID,))
         lecture=cursor.fetchone()
-        return lecture[0]
+        return lecture
 
 def getAllLecture(groupID):
     with dbConnection() as cursor:
@@ -92,8 +92,8 @@ def getAllLecture(groupID):
 
 def editLecture(lecture,groupID):
     with dbConnection() as cursor:
-        query='UPDATE lectures SET lec_name=%s, phone=%s, rate=%s, pic=% WHERE lecID=%s and groupID=%s'
-        cursor.execute(query,(lecture.name,lecture.phone,lecture.rate,lecture.pic,lecture.lecID,groupID,))
+        query='UPDATE lectures SET lec_name=%s, phone=%s, rate=%s, pic=%s WHERE lecID=%s and groupID=%s'
+        cursor.execute(query,(lecture.name,lecture.phone,float(lecture.rate),lecture.pic,lecture.lecID,groupID,))
         return True
 
 def deleteLecture(lecID,groupID):

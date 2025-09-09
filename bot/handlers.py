@@ -49,10 +49,14 @@ def register_handlers(bot: telebot):
             #lecture
             elif operate=='addLecture':
                 lecture_cr.addLecture(bot, groupID)
+            elif operate=='getAllLectures':
+                lecture_cr.getAllLectures(bot, groupID)
+            elif operate=='lecture':
+                lecture_cr.getLecture(bot,modelsID,groupID)
             elif operate=='getLecture':
                 lecture_cr.getLecture(bot,modelsID,groupID)
             elif operate=='editLecture':
-                lecture_cr.editLecture(bot,groupID)
+                lecture_cr.editLecture(bot,modelsID,groupID)
             elif operate == 'deleteLecture':
                 status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
                 if status:
@@ -68,8 +72,7 @@ def register_handlers(bot: telebot):
                         lecture_cr.deleteLecture(bot,modelsID,groupID)
             elif operate == 'noAnswr':
                 bot.send_message(groupID,"Delete process was canceled")
-            elif operate=='getAllLectures':
-                lecture_cr.getAllLectures(bot, groupID)
+
 
 
 
