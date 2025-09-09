@@ -1,7 +1,5 @@
-import telebot as tb
 from telebot.types import InlineKeyboardButton,InlineKeyboardMarkup
-import dbMig
-from lecture import Group
+
 
 def manageStudents(bot,groupID):
     markup=InlineKeyboardMarkup()

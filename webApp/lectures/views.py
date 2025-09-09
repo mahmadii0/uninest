@@ -1,13 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from bot.lecture import Lecture
-from bot import dbMig
+from shared.models import Lecture
+from shared import dbMig
+from webApp.utils.utils import publishEvent
 
 
 def addLecture(request,token):
     if request.method=='POST':
         groupID = ""
-        groupID= dbMig.getRequest(token)
+        rqust= dbMig.getRequest(token)
+        groupID=rqust[1]
         if groupID=="":
             print('error while getting groupID')
             return HttpResponse("Bad Request", status=400)
@@ -31,7 +33,7 @@ def addLecture(request,token):
         if status!=True:
             print('error while adding to database')
             return HttpResponse("Bad Request", status=400)
-        webApp.utils.utils.publishEvent("lecture-added", {"groupID": groupID})
+        publishEvent("lecture-added", {"groupID": groupID})
         return render(request, 'return-to-bot.html')
     elif request.method=='GET':
         return render(request, 'create-edit-lecture.html', {'typee': 'add'})

@@ -1,7 +1,8 @@
 import mysql.connector
 from contextlib import contextmanager
-from constants import connectionDetail,tables
-import lecture
+from .constants import connectionDetail,tables
+
+
 @contextmanager
 def dbConnection():
     conn = None
@@ -50,17 +51,17 @@ def addGroup(group):
         cursor.execute(query,(group.groupID,group.name,group.lang))
     return True
 
-def addRequest(token,groupID):
+def addRequest(token,groupID,typee):
     with dbConnection() as cursor:
-        query='INSERT INTO requests VALUES (%s,%s)'
-        cursor.execute(query,(token,int(groupID)))
+        query='INSERT INTO requests VALUES (%s,%s,%s)'
+        cursor.execute(query,(token,int(groupID),typee,))
     return True
 def getRequest(token):
     with dbConnection() as cursor:
-        query='SELECT groupID FROM requests WHERE token=%s'
+        query='SELECT * FROM requests WHERE token=%s'
         cursor.execute(query,(token,))
-        id=cursor.fetchone()
-        return id[0]
+        request=cursor.fetchone()
+        return request
 def delRequest(token):
     with dbConnection() as cursor:
         query='DELETE FROM requests WHERE token=%s'
@@ -74,3 +75,29 @@ def addLecture(lecture,groupID):
         query='INSERT INTO lectures(lec_name,phone,rate,pic,groupID) VALUES(%s,%s,%s,%s,%s)'
         cursor.execute(query,(lecture.name,lecture.phone,lecture.rate,lecture.pic,groupID))
     return True
+
+def getLecture(lecID,groupID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM lectures WHERE lecID=%s AND groupID=%s'
+        cursor.execute(query,(lecID,))
+        lecture=cursor.fetchone()
+        return lecture[0]
+
+def getAllLecture(groupID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM lectures WHERE groupID=%s'
+        cursor.execute(query,(groupID,))
+        list=cursor.fetchall()
+        return list
+
+def editLecture(lecture,groupID):
+    with dbConnection() as cursor:
+        query='UPDATE lectures SET lec_name=%s, phone=%s, rate=%s, pic=% WHERE lecID=%s and groupID=%s'
+        cursor.execute(query,(lecture.name,lecture.phone,lecture.rate,lecture.pic,lecture.lecID,groupID,))
+        return True
+
+def deleteLecture(lecID,groupID):
+    with dbConnection() as cursor:
+        query='DELETE FROM lectures WHERE lecID=%s and groupID=%s'
+        cursor.execute(query,(lecID,groupID,))
+        return True

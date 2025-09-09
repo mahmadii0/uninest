@@ -1,7 +1,7 @@
 import telebot
-from constants import Token
+from shared.constants import Token
 from handlers import register_handlers
-from dbMig import createTables
+from shared.dbMig import createTables
 from group_cr import storeGroupIDs
 import redis,json,threading
 

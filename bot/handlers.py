@@ -1,6 +1,9 @@
 import telebot
 from telebot.types import Message,InlineKeyboardButton,InlineKeyboardMarkup
 import group_cr,class_cr,student_cr,lecture_cr
+from shared import dbMig
+
+
 def register_handlers(bot: telebot):
     @bot.message_handler(commands=['start'])
     def start(message: Message):
@@ -29,9 +32,12 @@ def register_handlers(bot: telebot):
         else:
             operate=None
             groupID=None
+            modelsID=None
             data= call.data.split('_')
             if len(data)==2:
                 operate,groupID=data
+            elif len(data)==3:
+                operate,modelsID,groupID=data
             if operate=='manageClasses':
                 class_cr.manageClasses(bot, groupID)
             elif operate=='manageLectures':
@@ -44,8 +50,26 @@ def register_handlers(bot: telebot):
             elif operate=='addLecture':
                 lecture_cr.addLecture(bot, groupID)
             elif operate=='getLecture':
-                lecture_cr.getLecture(bot, groupID)
+                lecture_cr.getLecture(bot,modelsID,groupID)
+            elif operate=='editLecture':
+                lecture_cr.editLecture(bot,groupID)
+            elif operate == 'deleteLecture':
+                status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
+                if status:
+                    markup = InlineKeyboardMarkup()
+                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{groupID}")
+                    markup.add(yes,no)
+                    bot.send_message(groupID, "Are you sure you want to delete the lecture?",reply_markup=markup)
+            elif operate == 'yesAnswr':
+                request=dbMig.getRequest(modelsID)
+                match request[2]:
+                    case "delete_lecture":
+                        lecture_cr.deleteLecture(bot,modelsID,groupID)
+            elif operate == 'noAnswr':
+                bot.send_message(groupID,"Delete process was canceled")
             elif operate=='getAllLectures':
                 lecture_cr.getAllLectures(bot, groupID)
+
 
 

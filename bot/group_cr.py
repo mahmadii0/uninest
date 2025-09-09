@@ -1,7 +1,7 @@
 import telebot as tb
 from telebot.types import InlineKeyboardButton,InlineKeyboardMarkup
-import dbMig
-from lecture import Group
+from shared import dbMig
+from shared.models import Group
 
 _=None
 groupIDs=[]
