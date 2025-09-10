@@ -131,3 +131,32 @@ def deleteClass(clssID,groupID):
             query = 'DELETE FROM classes WHERE classID=%s and groupID=%s'
             cursor.execute(query, (clssID, groupID,))
             return True
+#Student
+def addStudent(student,groupID):
+    with dbConnection() as cursor:
+        query='INSERT INTO students(std_name,username,groupID) VALUES(%s,%s,%s)'
+        cursor.execute(query,(student.name,student.username,groupID,))
+        return True
+def getStudent(studentID,groupID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM students WHERE studentID=%s AND groupID=%s'
+        cursor.execute(query,(studentID,groupID,))
+        student=cursor.fetchone()
+        return student
+def getAllStudent(groupID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM students WHERE groupID=%s'
+        cursor.execute(query,(groupID,))
+        list=cursor.fetchall()
+        return list
+def editStudent(student,groupID):
+    with dbConnection() as cursor:
+        query='UPDATE students SET std_name=%s, username=%s WHERE studentID=%s and groupID=%s'
+        cursor.execute(query,(student.name,student.username,student.StudentID,groupID,))
+        return True
+def deleteStudent(studentID,groupID):
+    with dbConnection() as cursor:
+        with dbConnection() as cursor:
+            query = 'DELETE FROM students WHERE studentID=%s and groupID=%s'
+            cursor.execute(query, (studentID, groupID,))
+            return True
