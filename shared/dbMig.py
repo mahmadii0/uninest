@@ -101,3 +101,33 @@ def deleteLecture(lecID,groupID):
         query='DELETE FROM lectures WHERE lecID=%s and groupID=%s'
         cursor.execute(query,(lecID,groupID,))
         return True
+
+#Class
+def addClass(clss,groupID):
+    with dbConnection() as cursor:
+        query='INSERT INTO classes(class_name,lecID,groupID) VALUES(%s,%s,%s)'
+        cursor.execute(query,(clss.name,clss.lecID,groupID,))
+        return True
+def getClass(clssID,groupID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM classes WHERE classID=%s AND groupID=%s'
+        cursor.execute(query,(clssID,groupID,))
+        clss=cursor.fetchone()
+        return clss
+def getAllClass(groupID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM classes WHERE groupID=%s'
+        cursor.execute(query,(groupID,))
+        list=cursor.fetchall()
+        return list
+def editClass(clss,groupID):
+    with dbConnection() as cursor:
+        query='UPDATE classes SET class_name=%s, lecID=%s WHERE classID=%s and groupID=%s'
+        cursor.execute(query,(clss.name,clss.lecID,clss.classID,groupID,))
+        return True
+def deleteClass(clssID,groupID):
+    with dbConnection() as cursor:
+        with dbConnection() as cursor:
+            query = 'DELETE FROM classes WHERE classID=%s and groupID=%s'
+            cursor.execute(query, (clssID, groupID,))
+            return True

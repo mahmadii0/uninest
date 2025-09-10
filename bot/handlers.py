@@ -46,6 +46,7 @@ def register_handlers(bot: telebot):
                 student_cr.manageStudents(bot, groupID)
             elif operate=='searchFiles':
                 pass
+
             #lecture
             elif operate=='addLecture':
                 lecture_cr.addLecture(bot, groupID)
@@ -65,6 +66,27 @@ def register_handlers(bot: telebot):
                     no=InlineKeyboardButton('no',callback_data=f"noAnswr_{groupID}")
                     markup.add(yes,no)
                     bot.send_message(groupID, "Are you sure you want to delete the lecture?",reply_markup=markup)
+
+            #Classes
+            elif operate=='addClass':
+                class_cr.addClass(bot, groupID)
+            elif operate=='getAllClasses':
+                class_cr.getAllClass(bot, groupID)
+            elif operate=='class':
+                class_cr.getClass(bot,modelsID,groupID)
+            elif operate=='editClass':
+                class_cr.editClass(bot,modelsID,groupID)
+            elif operate == 'deleteClass':
+                status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
+                if status:
+                    markup = InlineKeyboardMarkup()
+                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{groupID}")
+                    markup.add(yes,no)
+                    bot.send_message(groupID, "Are you sure you want to delete the lecture?",reply_markup=markup)
+
+
+
             elif operate == 'yesAnswr':
                 request=dbMig.getRequest(modelsID)
                 match request[2]:

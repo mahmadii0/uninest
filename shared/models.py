@@ -17,7 +17,7 @@ class Lecture:
 class Class:
     def __init__(self,name,lecID):
         global _idCounter
-        self.lecID = _idCounter
+        self.classID = _idCounter
         _idCounter += 1
         self.name=name
         self.lecID=lecID
@@ -25,7 +25,7 @@ class Class:
 class Student:
     def __init__(self,name,userName):
         global _idCounter
-        self.lecID = _idCounter
+        self.StudentID = _idCounter
         _idCounter += 1
         self.name=name
         self.username=userName
