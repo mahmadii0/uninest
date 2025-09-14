@@ -19,7 +19,7 @@
             {% csrf_token %}
             <div>
                 <label for="name" class="block text-sm font-medium mb-1">Class Name</label>
-                <input value='{% if typee == 'edit' %} {{ lec_name }} {% endif %}' id="name" type="text" name="name" placeholder="Enter class name" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+                <input value='{% if typee == 'edit' %} {{ class_name }} {% endif %}' id="name" type="text" name="name" placeholder="Enter class name" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
             </div>
             <div>
                 <label for="lecture" class="block text-sm font-medium mb-1">Lectures</label>

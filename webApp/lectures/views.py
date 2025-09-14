@@ -31,7 +31,7 @@ def addLecture(request,token):
             return HttpResponse("Bad Request", status=400)
         status= dbMig.delRequest(token)
         if status!=True:
-            print('error while adding to database')
+            print('error while deleting request')
             return HttpResponse("Bad Request", status=400)
         publishEvent("lecture-added", {"groupID": groupID})
         return render(request, 'return-to-bot.html')
@@ -65,7 +65,7 @@ def editLecture(request,token):
             return HttpResponse("Bad Request", status=400)
         status= dbMig.delRequest(token)
         if status!=True:
-            print('error while adding to database')
+            print('error while deleting request')
             return HttpResponse("Bad Request", status=400)
         publishEvent("lecture-edited", {"groupID": groupID})
         return render(request, 'return-to-bot.html')
