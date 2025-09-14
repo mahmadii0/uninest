@@ -134,19 +134,26 @@ def deleteClass(clssID,groupID):
 #Student
 def addStudent(student,groupID):
     with dbConnection() as cursor:
-        query='INSERT INTO students(std_name,username,groupID) VALUES(%s,%s,%s)'
-        cursor.execute(query,(student.name,student.username,groupID,))
+        query='INSERT IGNORE INTO students(studentID,std_name,username,groupID) VALUES(%s,%s,%s,%s)'
+        cursor.execute(query,(student.StudentID,student.name,student.username,groupID,))
         return True
-def getStudent(studentID,groupID):
+
+def addStudentToClass(studentID,classID,groupID):
     with dbConnection() as cursor:
-        query='SELECT * FROM students WHERE studentID=%s AND groupID=%s'
-        cursor.execute(query,(studentID,groupID,))
-        student=cursor.fetchone()
-        return student
-def getAllStudent(groupID):
+        query='INSERT INTO student_class_relation(classID,studentID,groupID) VALUES(%s,%s,%s)'
+        cursor.execute(query,(classID,studentID,groupID))
+        return True
+
+def getStudent(studentID,classID,groupID):
     with dbConnection() as cursor:
-        query='SELECT * FROM students WHERE groupID=%s'
-        cursor.execute(query,(groupID,))
+        query='SELECT classID FROM student_class_relation WHERE studentID=%s AND groupID=%s AND classID=%s'
+        cursor.execute(query,(studentID,groupID,classID,))
+        std=cursor.fetchone()
+        return std
+def getAllStudent(classID,groupID):
+    with dbConnection() as cursor:
+        query='''SELECT students.std_name, students.username FROM student_class_relation INNER JOIN students ON student_class_relation.studentID=students.studentID WHERE student_class_relation.classID=%s and student_class_relation.groupID=%s'''
+        cursor.execute(query,(classID,groupID,))
         list=cursor.fetchall()
         return list
 def editStudent(student,groupID):
@@ -154,9 +161,34 @@ def editStudent(student,groupID):
         query='UPDATE students SET std_name=%s, username=%s WHERE studentID=%s and groupID=%s'
         cursor.execute(query,(student.name,student.username,student.StudentID,groupID,))
         return True
-def deleteStudent(studentID,groupID):
+def deleteStudent(studentID,classID,groupID):
     with dbConnection() as cursor:
-        with dbConnection() as cursor:
-            query = 'DELETE FROM students WHERE studentID=%s and groupID=%s'
-            cursor.execute(query, (studentID, groupID,))
-            return True
+        query = 'DELETE FROM student_class_relation WHERE studentID=%s and groupID=%s and classID=%s'
+        cursor.execute(query, (studentID, groupID,classID))
+        return True
+#Exam
+def addExam(exam,groupID):
+    with dbConnection() as cursor:
+        query='INSERT INTO exams(title,classID,date_time) VALUES(%s,%s,%s)'
+        cursor.execute(query,(exam.title,exam.classID,exam.dateTime,))
+        return True
+
+def getExams(classID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM exams WHERE classID=%s'
+        cursor.execute(query,(classID,))
+        list=cursor.fetchall()
+        return list
+
+def getExam(examID):
+    with dbConnection() as cursor:
+        query = 'SELECT * FROM exams WHERE examID=%s'
+        cursor.execute(query, (examID,))
+        std = cursor.fetchone()
+        return std
+
+def deleteExam(examID):
+    with dbConnection() as cursor:
+        query = 'DELETE FROM exams WHERE examID=%s'
+        cursor.execute(query, (examID,))
+        return True

@@ -20,44 +20,53 @@ def addClass(bot,groupID):
                      'Yeah! Now you can add the class from this url:' + '\n' + f'http://127.0.0.1:8000/add-class/{_num}')
 
 def getAllClass(bot,groupID):
-    list = dbMig.getAllLecture(groupID)
+    list = dbMig.getAllClass(groupID)
     if list == None:
-        bot.send_message("Your request for getting all lectures, failed")
+        bot.send_message("Your request for getting all classes, failed")
     wholeMessage = ""
     markup = InlineKeyboardMarkup()
     for item in list:
+        lec=dbMig.getLecture(item[2],groupID)
         message = f"""
-        lecture name: {item[1]}
-        phone: {item[2]}
-        rate: {item[3]}
+        class name: {item[1]}
+        lecture: {lec[1]}
         -----------------
         """
         wholeMessage = wholeMessage + message
-        btn = InlineKeyboardButton(f'{item[1]}', callback_data=f"lecture_{item[0]}_{groupID}")
+        btn = InlineKeyboardButton(f'{item[1]}', callback_data=f"class_{item[0]}_{groupID}")
         markup.add(btn)
 
-    bot.send_message(groupID, wholeMessage + f"\nnumber of lectures: {len(list)}", reply_markup=markup)
+    bot.send_message(groupID, wholeMessage + f"\nnumber of classes: {len(list)}", reply_markup=markup)
 
 def getClass(bot,classID,groupID):
-    lec = dbMig.getLecture(lecID, groupID)
-    if lec == None:
-        bot.send_message(groupID, "Your request for getting lecture, failed")
+    clss = dbMig.getClass(classID, groupID)
+    if clss == None:
+        bot.send_message(groupID, "Your request for getting class, failed")
+    lec = dbMig.getLecture(clss[2], groupID)
     message = f"""
-    lecture name: {lec[1]}
-    phone: {lec[2]}
-    rate: {lec[3]}"""
+    class name: {clss[1]}
+    lecture: {lec[1]}"""
     markup = InlineKeyboardMarkup()
-    edit = InlineKeyboardButton('edit', callback_data=f"editLecture_{lec[0]}_{groupID}")
-    delete = InlineKeyboardButton('delete', callback_data=f"deleteLecture_{lec[0]}_{groupID}")
-    markup.add(edit, delete)
+    edit = InlineKeyboardButton('edit', callback_data=f"editClass_{clss[0]}_{groupID}")
+    delete = InlineKeyboardButton('delete', callback_data=f"deleteClass_{clss[0]}_{groupID}")
+    exams= InlineKeyboardButton('exams',callback_data=f"getExams_{clss[0]}_{groupID}")
+    addExam=InlineKeyboardButton('add exam',callback_data=f"addExam_{clss[0]}_{groupID}")
+    addStd=InlineKeyboardButton(('add me as student'),callback_data=f'addStudent_{clss[0]}_{groupID}')
+    deleteStd=InlineKeyboardButton('delete me from class',callback_data=f'deleteStudent_{clss[0]}_{groupID}')
+    getAll=InlineKeyboardButton(('Get All Students'),callback_data=f'getAllStudents_{clss[0]}_{groupID}')
+    markup.add(edit,delete,exams,addStd,deleteStd,getAll)
     bot.send_message(groupID, message, reply_markup=markup)
 
 def editClass(bot,classID,groupID):
-    status = dbMig.addRequest(lecID, groupID, "edit_lecture")
+    status = dbMig.addRequest(classID, groupID, "edit_class")
     if status != True:
         bot.send_message(groupID, 'Error while adding request')
     bot.send_message(groupID,
-                     'Yeah! Now you can edit the lecture from this url:' + '\n' + f'http://127.0.0.1:8000/edit-lecture/{lecID}')
+                     'Yeah! Now you can edit the class from this url:' + '\n' + f'http://127.0.0.1:8000/edit-class/{classID}')
 
-def deleteClass():
-    pass
+def deleteClass(bot,classID,groupID):
+    status = dbMig.deleteClass(classID, groupID)
+    if status:
+        status = dbMig.delRequest(classID)
+        if status:
+            bot.send_message(groupID, "The class successfully deleted")

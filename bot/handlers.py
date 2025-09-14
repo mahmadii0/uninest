@@ -1,6 +1,7 @@
 import telebot
 from telebot.types import Message,InlineKeyboardButton,InlineKeyboardMarkup
 import group_cr,class_cr,student_cr,lecture_cr
+import exam_cr
 from shared import dbMig
 
 
@@ -15,9 +16,8 @@ def register_handlers(bot: telebot):
                 markup=InlineKeyboardMarkup()
                 classes=InlineKeyboardButton(('Manage Classes'),callback_data=f'manageClasses_{message.chat.id}')
                 lectures=InlineKeyboardButton(('Manage Lectures'),callback_data=f'manageLectures_{message.chat.id}')
-                students=InlineKeyboardButton(('Manage Students'),callback_data=f'manageStudents_{message.chat.id}')
                 searchFile=InlineKeyboardButton(('Search File'),callback_data=f'searchFiles_{message.chat.id}')
-                markup.add(lectures,classes,students,searchFile)
+                markup.add(lectures,classes,searchFile)
                 bot.send_message(message.chat.id, f'How can i help you?',reply_markup=markup)
             else:
                 group_cr.langChoosing(bot, message)
@@ -42,8 +42,6 @@ def register_handlers(bot: telebot):
                 class_cr.manageClasses(bot, groupID)
             elif operate=='manageLectures':
                 lecture_cr.manageLectures(bot, groupID)
-            elif operate=='manageStudents':
-                student_cr.manageStudents(bot, groupID)
             elif operate=='searchFiles':
                 pass
 
@@ -63,7 +61,7 @@ def register_handlers(bot: telebot):
                 if status:
                     markup = InlineKeyboardMarkup()
                     yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{groupID}")
+                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
                     markup.add(yes,no)
                     bot.send_message(groupID, "Are you sure you want to delete the lecture?",reply_markup=markup)
 
@@ -77,23 +75,77 @@ def register_handlers(bot: telebot):
             elif operate=='editClass':
                 class_cr.editClass(bot,modelsID,groupID)
             elif operate == 'deleteClass':
-                status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
+                status=dbMig.addRequest(modelsID,groupID,"delete_class")
                 if status:
                     markup = InlineKeyboardMarkup()
                     yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{groupID}")
+                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
                     markup.add(yes,no)
-                    bot.send_message(groupID, "Are you sure you want to delete the lecture?",reply_markup=markup)
+                    bot.send_message(groupID, "Are you sure you want to delete the class?",reply_markup=markup)
 
-
+            #Students
+            elif operate=='addStudent':
+                stdID=call.from_user.id
+                if call.from_user.first_name == None and call.from_user.last_name==None:
+                    stdName='No name'
+                elif call.from_user.first_name == None and call.from_user.last_name!=None:
+                    stdName=call.from_user.last_name
+                elif call.from_user.first_name != None and call.from_user.last_name==None:
+                    stdName = call.from_user.first_name
+                elif call.from_user.first_name != None and call.from_user.last_name!=None:
+                    stdName=(call.from_user.first_name)+" "+(call.from_user.last_name)
+                stdUsername=call.from_user.username
+                student_cr.addStudent(bot,stdID,stdName,stdUsername,modelsID,groupID)
+            elif operate=='getAllStudents':
+                student_cr.getAllStudent(bot,modelsID,groupID)
+            elif operate=='student':
+                student_cr.getStudent(bot,modelsID,groupID)
+            elif operate == 'deleteStudent':
+                student=dbMig.getStudent(call.from_user.id,modelsID,groupID)
+                if student==None:
+                    bot.send_message(groupID,'You already not in this class')
+                    return
+                status=dbMig.addRequest(modelsID,groupID,"delete_student")
+                if status:
+                    markup = InlineKeyboardMarkup()
+                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
+                    markup.add(yes,no)
+                    bot.send_message(groupID, "Are you sure you want to delete the student?",reply_markup=markup)
+            elif operate == 'addExam':
+                exam_cr.addExam(bot,modelsID,groupID)
+            elif operate == 'getExams':
+                exam_cr.getExams(bot,modelsID,groupID)
+            elif operate == 'exam':
+                exam_cr.getExam(bot,modelsID,groupID)
+            elif operate == 'deleteExam':
+                status=dbMig.addRequest(modelsID,groupID,"delete_exam")
+                if status:
+                    markup = InlineKeyboardMarkup()
+                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
+                    markup.add(yes,no)
+                    bot.send_message(groupID, "Are you sure you want to delete the exam?",reply_markup=markup)
 
             elif operate == 'yesAnswr':
                 request=dbMig.getRequest(modelsID)
-                match request[2]:
-                    case "delete_lecture":
-                        lecture_cr.deleteLecture(bot,modelsID,groupID)
+                if request!=None:
+                    match request[2]:
+                        case "delete_lecture":
+                            lecture_cr.deleteLecture(bot,modelsID,groupID)
+                            _=dbMig.delRequest(modelsID)
+                        case "delete_class":
+                            class_cr.deleteClass(bot,modelsID,groupID)
+                            _ = dbMig.delRequest(modelsID)
+                        case "delete_student":
+                            student_cr.deleteStudent(bot,call.from_user.id,modelsID,groupID)
+                            _ = dbMig.delRequest(modelsID)
+                        case "delete_exam":
+                            exam_cr.deleteExam(bot,modelsID,groupID)
             elif operate == 'noAnswr':
-                bot.send_message(groupID,"Delete process was canceled")
+                status=dbMig.delRequest(modelsID)
+                if status:
+                    bot.send_message(groupID,"Delete process was canceled")
 
 
 
