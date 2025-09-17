@@ -114,6 +114,8 @@ def register_handlers(bot: telebot):
                     bot.send_message(groupID, "Are you sure you want to delete the student?",reply_markup=markup)
             elif operate == 'addExam':
                 exam_cr.addExam(bot,modelsID,groupID)
+            elif operate == 'editExam':
+                exam_cr.editExam(bot,modelsID,groupID)
             elif operate == 'getExams':
                 exam_cr.getExams(bot,modelsID,groupID)
             elif operate == 'exam':

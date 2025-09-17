@@ -11,6 +11,13 @@ def addExam(bot,classID,groupID):
     bot.send_message(groupID,
                      'Yeah! Now you can add the exam from this url:' + '\n' + f'http://127.0.0.1:8000/add-exam/{classID}')
 
+def editExam(bot,examID,groupID):
+    status = dbMig.addRequest(examID, groupID, "edit_exam")
+    if status != True:
+        bot.send_message(groupID, 'Error while adding request')
+    bot.send_message(groupID,
+                     'Yeah! Now you can edit the exam from this url:' + '\n' + f'http://127.0.0.1:8000/edit-exam/{examID}')
+
 def getExams(bot,classID,groupID):
     list = dbMig.getExams(classID)
     if list == None:
@@ -36,9 +43,9 @@ def getExam(bot,examID,groupID):
     title: {exam[1]}
     date: {exam[3]}"""
     markup = InlineKeyboardMarkup()
-    # edit = InlineKeyboardButton('edit', callback_data=)
+    edit = InlineKeyboardButton('edit', callback_data=f'editExam_{exam[0]}_{groupID}')
     delete = InlineKeyboardButton('delete', callback_data=f"deleteExam_{exam[0]}_{groupID}")
-    markup.add(delete)
+    markup.add(delete,edit)
     bot.send_message(groupID, message, reply_markup=markup)
 
 def deleteExam(bot,examID,groupID):

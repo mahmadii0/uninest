@@ -34,6 +34,12 @@ def listen_for_events():
                 case 'student-edited':
                     groupID = data['data']['groupID']
                     bot.send_message(groupID, "your info successfully edited!")
+                case 'exam_added':
+                    groupID = data['data']['groupID']
+                    bot.send_message(groupID, "Exam successfully added!")
+                case 'exam-edited':
+                    groupID = data['data']['groupID']
+                    bot.send_message(groupID, "Exam successfully edited!")
 
 threading.Thread(target=listen_for_events, daemon=True).start()
 

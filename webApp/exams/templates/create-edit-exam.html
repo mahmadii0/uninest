@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"Wardrobe malfunction class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if typee == 'add' %}Add Exam{% else %}Edit Exam{% endif %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/create-edit.css">
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md bg-[var(--bg-color)] p-8 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold mb-6">{% if typee == 'add' %}Add Exam{% else %}Edit Exam{% endif %}</h2>
+            <button id="toggleMode" class="px-4 py-2 rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+                Toggle Dark Mode
+            </button>
+        </div>
+        <form class="space-y-4" method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="title" class="block text-sm font-medium mb-1">Exam Title</label>
+                <input value='{% if typee == 'edit' %} {{ exam_title }} {% endif %}' id="title" type="text" name="title" placeholder="Enter exam title" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            </div>
+            <div>
+                <label for="datetime" class="block text-sm font-medium mb-1">Exam Title</label>
+                <input value='{% if typee == 'edit' %} {{ exam_datetime }} {% endif %}' id="datetime" type="datetime-local" name="datetime" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            </div>
+            <button type="submit" class="w-full px-4 py-2 rounded-md font-medium hover:opacity-90">Submit</button>
+        </form>
+    </div>
+<script>
+        const htmlElement = document.documentElement;
+        const toggleButton = document.getElementById('toggleMode');
+
+        toggleButton.addEventListener('click', () => {
+            if (htmlElement.classList.contains('light')) {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+            }
+        });
+    </script>
+            </body>
+</html>

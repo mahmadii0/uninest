@@ -36,18 +36,7 @@ def addClass(request,token):
         if rqust == None:
             print("Error while getting request")
             return HttpResponse("Bad request",status=400)
-        lectures=dbMig.getAllLecture(rqust[1])
-        list=[]
-        for lec in lectures:
-            lecture=Lecture(
-                name=lec[1],
-                phone=lec[2],
-                rate=lec[3],
-                pic=''
-            )
-            lecture.lecID=lec[0]
-            list.append(lecture)
-        return render(request, 'create-edit-class.html', {'typee': 'add','lectures':list})
+        return render(request, 'create-edit-exam.html', {'typee': 'add'})
 
 def editClass(request,token):
     if request.method=="POST":

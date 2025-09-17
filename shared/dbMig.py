@@ -167,10 +167,16 @@ def deleteStudent(studentID,classID,groupID):
         cursor.execute(query, (studentID, groupID,classID))
         return True
 #Exam
-def addExam(exam,groupID):
+def addExam(exam):
     with dbConnection() as cursor:
         query='INSERT INTO exams(title,classID,date_time) VALUES(%s,%s,%s)'
         cursor.execute(query,(exam.title,exam.classID,exam.dateTime,))
+        return True
+
+def editExam(exam,examID):
+    with dbConnection() as cursor:
+        query='UPDATE exams SET title=%s, date_time=%s WHERE examID=%s'
+        cursor.execute(query,(exam.title,exam.dateTime,examID,))
         return True
 
 def getExams(classID):
@@ -191,4 +197,23 @@ def deleteExam(examID):
     with dbConnection() as cursor:
         query = 'DELETE FROM exams WHERE examID=%s'
         cursor.execute(query, (examID,))
+        return True
+
+def addFile(file):
+    with dbConnection() as cursor:
+        query='INSERT INTO files VALUES(%s,%s,%s)'
+        cursor.execute(query,(file.FileName,file.address,file.classID,))
+        return True
+
+def getFile(fileName,classID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM files WHERE file_name=%s and classID=%s'
+        cursor.execute(query,(fileName,classID,))
+        file=cursor.fetchone()
+        return file
+
+def deleteFile(fileName,classID):
+    with dbConnection() as cursor:
+        query='DELETE FROM files WHERE file_name=%s and classID=%s'
+        cursor.execute(query,(fileName,classID,))
         return True

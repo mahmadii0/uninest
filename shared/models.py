@@ -31,7 +31,8 @@ class Student:
         self.username=userName
 
 class File:
-    def __init__(self,address,classID):
+    def __init__(self,fileName,address,classID):
+        self.FileName= fileName
         self.address=address
         self.classID=classID
 

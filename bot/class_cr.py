@@ -54,7 +54,7 @@ def getClass(bot,classID,groupID):
     addStd=InlineKeyboardButton(('add me as student'),callback_data=f'addStudent_{clss[0]}_{groupID}')
     deleteStd=InlineKeyboardButton('delete me from class',callback_data=f'deleteStudent_{clss[0]}_{groupID}')
     getAll=InlineKeyboardButton(('Get All Students'),callback_data=f'getAllStudents_{clss[0]}_{groupID}')
-    markup.add(edit,delete,exams,addStd,deleteStd,getAll)
+    markup.add(edit,delete,exams,addExam,addStd,deleteStd,getAll)
     bot.send_message(groupID, message, reply_markup=markup)
 
 def editClass(bot,classID,groupID):
@@ -69,4 +69,4 @@ def deleteClass(bot,classID,groupID):
     if status:
         status = dbMig.delRequest(classID)
         if status:
-            bot.send_message(groupID, "The class successfully deleted")
+            bot.send_message(groupID, "The exam successfully deleted")
