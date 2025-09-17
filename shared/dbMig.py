@@ -213,12 +213,12 @@ def getFile(fileName,classID):
         file=cursor.fetchone()
         return file
 
-def getFileByAddress(address):
+def searchFile(fileName,groupID):
     with dbConnection() as cursor:
-        query='SELECT * FROM files WHERE address=%s'
-        cursor.execute(query,(address,))
+        query='SELECT * FROM files JOIN classes ON files.classID = classes.classID WHERE files.file_name = %s AND classes.groupID = %s'
+        cursor.execute(query,(fileName,groupID,))
         file=cursor.fetchone()
-        return  file
+        return file
 
 def getAllFiles(classID):
     with dbConnection() as cursor:

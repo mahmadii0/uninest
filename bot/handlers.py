@@ -19,8 +19,7 @@ def register_handlers(bot: telebot):
                 markup=InlineKeyboardMarkup()
                 classes=InlineKeyboardButton(('Manage Classes'),callback_data=f'manageClasses_{message.chat.id}')
                 lectures=InlineKeyboardButton(('Manage Lectures'),callback_data=f'manageLectures_{message.chat.id}')
-                searchFile=InlineKeyboardButton(('Search File'),callback_data=f'searchFiles_{message.chat.id}')
-                markup.add(lectures,classes,searchFile)
+                markup.add(lectures,classes)
                 bot.send_message(message.chat.id, f'How can i help you?',reply_markup=markup)
             else:
                 group_cr.langChoosing(bot, message)
@@ -44,7 +43,10 @@ def register_handlers(bot: telebot):
             _=dbMig.delRequest(str(message.chat.id))
             file_cr.addFile(bot,message.caption,forwarded.message_id,rqust[1],message.chat.id)
 
-
+    @bot.message_handler(func=lambda msg: msg.text and msg.text.startswith("search_"))
+    def handle_search(message):
+        fileName = message.text.split("search_", 1)[1].strip()
+        file_cr.search(bot,fileName,message.chat.id)
     @bot.callback_query_handler(func=lambda call: True)
     def handle_callback(call):
         if call.data=='persian':
@@ -64,8 +66,6 @@ def register_handlers(bot: telebot):
                 class_cr.manageClasses(bot, groupID)
             elif operate=='manageLectures':
                 lecture_cr.manageLectures(bot, groupID)
-            elif operate=='searchFiles':
-                pass
 
             #lecture
             elif operate=='addLecture':

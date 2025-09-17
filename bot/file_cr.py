@@ -6,6 +6,13 @@ from shared.models import File
 from utils import rand
 from shared import dbMig
 
+def search(bot,fileName,groupID):
+    file=dbMig.searchFile(fileName,groupID)
+    if file == None:
+        bot.send_message(groupID,"The file isn't find")
+        return
+    getFile(bot,file[1],groupID)
+
 def getFile(bot,fileName,classID,bool=False):
     if bool:
         file=dbMig.getFile(fileName,classID)
