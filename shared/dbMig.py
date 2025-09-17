@@ -199,6 +199,7 @@ def deleteExam(examID):
         cursor.execute(query, (examID,))
         return True
 
+#File
 def addFile(file):
     with dbConnection() as cursor:
         query='INSERT INTO files VALUES(%s,%s,%s)'
@@ -212,8 +213,22 @@ def getFile(fileName,classID):
         file=cursor.fetchone()
         return file
 
-def deleteFile(fileName,classID):
+def getFileByAddress(address):
     with dbConnection() as cursor:
-        query='DELETE FROM files WHERE file_name=%s and classID=%s'
-        cursor.execute(query,(fileName,classID,))
+        query='SELECT * FROM files WHERE address=%s'
+        cursor.execute(query,(address,))
+        file=cursor.fetchone()
+        return  file
+
+def getAllFiles(classID):
+    with dbConnection() as cursor:
+        query='SELECT * FROM files WHERE classID=%s'
+        cursor.execute(query,(classID,))
+        list=cursor.fetchall()
+        return list
+
+def deleteFile(address):
+    with dbConnection() as cursor:
+        query='DELETE FROM files WHERE address=%s'
+        cursor.execute(query,(address,))
         return True

@@ -47,14 +47,16 @@ def getClass(bot,classID,groupID):
     class name: {clss[1]}
     lecture: {lec[1]}"""
     markup = InlineKeyboardMarkup()
-    edit = InlineKeyboardButton('edit', callback_data=f"editClass_{clss[0]}_{groupID}")
-    delete = InlineKeyboardButton('delete', callback_data=f"deleteClass_{clss[0]}_{groupID}")
-    exams= InlineKeyboardButton('exams',callback_data=f"getExams_{clss[0]}_{groupID}")
-    addExam=InlineKeyboardButton('add exam',callback_data=f"addExam_{clss[0]}_{groupID}")
-    addStd=InlineKeyboardButton(('add me as student'),callback_data=f'addStudent_{clss[0]}_{groupID}')
-    deleteStd=InlineKeyboardButton('delete me from class',callback_data=f'deleteStudent_{clss[0]}_{groupID}')
+    edit = InlineKeyboardButton('Edit', callback_data=f"editClass_{clss[0]}_{groupID}")
+    delete = InlineKeyboardButton('Delete', callback_data=f"deleteClass_{clss[0]}_{groupID}")
+    exams= InlineKeyboardButton('Exams',callback_data=f"getExams_{clss[0]}_{groupID}")
+    addExam=InlineKeyboardButton('Add Exam',callback_data=f"addExam_{clss[0]}_{groupID}")
+    addFile=InlineKeyboardButton('Add File To Class',callback_data=f"addFile_{clss[0]}_{groupID}")
+    getFiles=InlineKeyboardButton('Get All Files',callback_data=f"getAllFiles_{clss[0]}_{groupID}")
+    addStd=InlineKeyboardButton(('Add Me As Student'),callback_data=f'addStudent_{clss[0]}_{groupID}')
+    deleteStd=InlineKeyboardButton('Delete Me From Class',callback_data=f'deleteStudent_{clss[0]}_{groupID}')
     getAll=InlineKeyboardButton(('Get All Students'),callback_data=f'getAllStudents_{clss[0]}_{groupID}')
-    markup.add(edit,delete,exams,addExam,addStd,deleteStd,getAll)
+    markup.add(edit,delete,exams,addExam,addFile,getFiles,addStd,deleteStd,getAll)
     bot.send_message(groupID, message, reply_markup=markup)
 
 def editClass(bot,classID,groupID):

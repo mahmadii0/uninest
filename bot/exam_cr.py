@@ -1,7 +1,4 @@
 from telebot.types import InlineKeyboardButton,InlineKeyboardMarkup
-
-from shared.models import Exam
-from utils import rand
 from shared import dbMig
 
 def addExam(bot,classID,groupID):
