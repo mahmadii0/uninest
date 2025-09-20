@@ -1,2 +1,5 @@
 shared/constants.py
 bot/__pycache__
+shared/__pycache__
+webApp/__pycache__
+__pycache__
