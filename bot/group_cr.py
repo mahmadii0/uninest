@@ -29,12 +29,10 @@ def configureGroup(bot:tb,lang,call):
     )
     status= dbMig.addGroup(group)
     if status:
-        markup = InlineKeyboardMarkup
+        markup = InlineKeyboardMarkup()
         classes = InlineKeyboardButton(('Manage Classes'), callback_data='manage_classes')
         lectures = InlineKeyboardButton(('Manage Lectures'), callback_data='manage_lectures')
-        students = InlineKeyboardButton(('Manage Students'), callback_data='manage_students')
-        searchFile = InlineKeyboardButton(('Search File'), callback_data='search_file')
-        markup.add(classes, lectures, students, searchFile)
+        markup.add(classes, lectures)
         bot.send_message(group.groupID,("🤖Your Group successfully registered!"), reply_markup=markup)
 
 

@@ -4,11 +4,10 @@ import group_cr,class_cr,student_cr,lecture_cr
 import exam_cr
 import file_cr
 from shared import dbMig, constants
+from utils import deleteMessage,checkAdmin
 
-def deleteMessage(bot,call):
-    if call.data =='getAllLectures' or call.data == 'getAllClasses':
-        return
-    bot.delete_message(call.message.chat.id, call.message.message_id)
+def accessDenied(bot,groupID):
+    bot.send_message(groupID, "🚫Just the owner or admin of the group can to that!")
 
 def register_handlers(bot: telebot):
     @bot.message_handler(commands=['start'])
@@ -55,10 +54,17 @@ def register_handlers(bot: telebot):
     @bot.callback_query_handler(func=lambda call: True)
     def handle_callback(call):
         deleteMessage(bot,call)
+        status = checkAdmin(bot, call.message.chat.id, call.from_user.id)
         if call.data=='persian':
-            group_cr.configureGroup(bot, 'fa', call)
+            if status:
+                group_cr.configureGroup(bot, 'fa', call)
+            else:
+                accessDenied(bot,call.message.chat.id)
         elif call.data=='english':
-            group_cr.configureGroup(bot, 'en', call)
+            if status:
+                group_cr.configureGroup(bot, 'en', call)
+            else:
+                accessDenied(bot, call.message.chat.id)
         else:
             operate=None
             groupID=None
@@ -75,7 +81,10 @@ def register_handlers(bot: telebot):
 
             #lecture
             elif operate=='addLecture':
-                lecture_cr.addLecture(bot, groupID)
+                if status:
+                    lecture_cr.addLecture(bot, groupID)
+                else:
+                    accessDenied(bot, call.message.chat.id)
             elif operate=='getAllLectures':
                 lecture_cr.getAllLectures(bot, groupID)
             elif operate=='lecture':
@@ -83,33 +92,48 @@ def register_handlers(bot: telebot):
             elif operate=='getLecture':
                 lecture_cr.getLecture(bot,modelsID,groupID)
             elif operate=='editLecture':
-                lecture_cr.editLecture(bot,modelsID,groupID)
-            elif operate == 'deleteLecture':
-                status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
                 if status:
-                    markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
-                    markup.add(yes,no)
-                    bot.send_message(groupID, ("🔸Are you sure you want to delete the lecture?"),reply_markup=markup)
+                    lecture_cr.editLecture(bot,modelsID,groupID)
+                else:
+                    accessDenied(bot, call.message.chat.id)
+            elif operate == 'deleteLecture':
+                if status:
+                    status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
+                    if status:
+                        markup = InlineKeyboardMarkup()
+                        yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                        no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
+                        markup.add(yes,no)
+                        bot.send_message(groupID, ("🔸Are you sure you want to delete the lecture?"),reply_markup=markup)
+                else:
+                    accessDenied(bot, call.message.chat.id)
 
             #Classes
             elif operate=='addClass':
-                class_cr.addClass(bot, groupID)
+                if status:
+                    class_cr.addClass(bot, groupID)
+                else:
+                    accessDenied(bot, call.message.chat.id)
             elif operate=='getAllClasses':
                 class_cr.getAllClass(bot, groupID)
             elif operate=='class':
                 class_cr.getClass(bot,modelsID,groupID)
             elif operate=='editClass':
-                class_cr.editClass(bot,modelsID,groupID)
-            elif operate == 'deleteClass':
-                status=dbMig.addRequest(modelsID,groupID,"delete_class")
                 if status:
-                    markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
-                    markup.add(yes,no)
-                    bot.send_message(groupID, ("🔸Are you sure you want to delete the class?"),reply_markup=markup)
+                    class_cr.editClass(bot,modelsID,groupID)
+                else:
+                    accessDenied(bot, call.message.chat.id)
+            elif operate == 'deleteClass':
+                if status:
+                    status=dbMig.addRequest(modelsID,groupID,"delete_class")
+                    if status:
+                        markup = InlineKeyboardMarkup()
+                        yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                        no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
+                        markup.add(yes,no)
+                        bot.send_message(groupID, ("🔸Are you sure you want to delete the class?"),reply_markup=markup)
+                else:
+                    accessDenied(bot, call.message.chat.id)
 
             #Students
             elif operate=='addStudent':
@@ -143,44 +167,57 @@ def register_handlers(bot: telebot):
 
             #Exam
             elif operate == 'addExam':
-                exam_cr.addExam(bot,modelsID,groupID)
+                if status:
+                    exam_cr.addExam(bot,modelsID,groupID)
+                else:
+                    accessDenied(bot, call.message.chat.id)
             elif operate == 'editExam':
-                exam_cr.editExam(bot,modelsID,groupID)
+                if status:
+                    exam_cr.editExam(bot,modelsID,groupID)
+                else:
+                    accessDenied(bot, call.message.chat.id)
             elif operate == 'getExams':
                 exam_cr.getAllExams(bot,modelsID,groupID)
             elif operate == 'exam':
                 exam_cr.getExam(bot,modelsID,groupID)
             elif operate == 'deleteExam':
-                status=dbMig.addRequest(modelsID,groupID,"delete_exam")
                 if status:
-                    markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
-                    markup.add(yes,no)
-                    bot.send_message(groupID, ("🔸Are you sure you want to delete the exam?"),reply_markup=markup)
+                    status=dbMig.addRequest(modelsID,groupID,"delete_exam")
+                    if status:
+                        markup = InlineKeyboardMarkup()
+                        yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                        no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
+                        markup.add(yes,no)
+                        bot.send_message(groupID, ("🔸Are you sure you want to delete the exam?"),reply_markup=markup)
+                else:
+                    accessDenied(bot, call.message.chat.id)
 
             #File
             elif operate == 'addFile':
-                status=dbMig.addRequest(groupID,modelsID,'add_file')
                 if status:
-                    markup=InlineKeyboardMarkup()
-                    cancel=InlineKeyboardButton(('Cancel adding file'),callback_data=f'cancel_{groupID}')
-                    markup.add(cancel)
-                    bot.send_message(groupID,('🔹Please send your file with a specific name in its caption'),reply_markup=markup)
+                    status=dbMig.addRequest(groupID,modelsID,'add_file')
+                    if status:
+                        markup=InlineKeyboardMarkup()
+                        cancel=InlineKeyboardButton(('Cancel adding file'),callback_data=f'cancel_{groupID}')
+                        markup.add(cancel)
+                        bot.send_message(groupID,('🔹Please send your file with a specific name in its caption'),reply_markup=markup)
+                else:
+                    accessDenied(bot, call.message.chat.id)
             elif operate == 'getAllFiles':
                 file_cr.getAllFiles(bot,modelsID,groupID)
             elif operate == 'getFile':
                 file_cr.getFile(bot,modelsID,groupID)
             elif operate == 'deleteFile':
-                status=dbMig.addRequest(modelsID,groupID,"delete_file")
                 if status:
-                    markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
-                    markup.add(yes,no)
-                    bot.send_message(groupID, ("🔸Are you sure you want to delete the file?"),reply_markup=markup)
-
-
+                    status=dbMig.addRequest(modelsID,groupID,"delete_file")
+                    if status:
+                        markup = InlineKeyboardMarkup()
+                        yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                        no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
+                        markup.add(yes,no)
+                        bot.send_message(groupID, ("🔸Are you sure you want to delete the file?"),reply_markup=markup)
+                else:
+                    accessDenied(bot, call.message.chat.id)
 
             elif operate == 'yesAnswr':
                 request=dbMig.getRequest(modelsID)
