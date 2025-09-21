@@ -19,7 +19,7 @@ def langChoosing(bot:tb,message):
     persian=InlineKeyboardButton(("فارسی"),callback_data='persian')
     english=InlineKeyboardButton(("English"),callback_data='english')
     markup.add(persian,english)
-    bot.send_message(message.chat.id,"Please Select Your Language First:",reply_markup=markup)
+    bot.send_message(message.chat.id,("🔹Please Select Your Language First:"),reply_markup=markup)
 
 def configureGroup(bot:tb,lang,call):
     group=Group(
@@ -35,7 +35,7 @@ def configureGroup(bot:tb,lang,call):
         students = InlineKeyboardButton(('Manage Students'), callback_data='manage_students')
         searchFile = InlineKeyboardButton(('Search File'), callback_data='search_file')
         markup.add(classes, lectures, students, searchFile)
-        bot.send_message(group.groupID,"Your Group successfully registered!", reply_markup=markup)
+        bot.send_message(group.groupID,("🤖Your Group successfully registered!"), reply_markup=markup)
 
 
 

@@ -4,40 +4,44 @@ import group_cr,class_cr,student_cr,lecture_cr
 import exam_cr
 import file_cr
 from shared import dbMig, constants
-from utils import rand
 
-
+def deleteMessage(bot,call):
+    if call.data =='getAllLectures' or call.data == 'getAllClasses':
+        return
+    bot.delete_message(call.message.chat.id, call.message.message_id)
 
 def register_handlers(bot: telebot):
     @bot.message_handler(commands=['start'])
     def start(message: Message):
         if message.chat.type == "private":
             name = message.from_user.first_name
-            bot.send_message(message.chat.id,f'welcome to UniNest {name}!')
+            bot.send_message(message.chat.id,(f'welcome to UniNest')+f' {name}!')
         else:
             if int(message.chat.id) in group_cr.groupIDs:
                 markup=InlineKeyboardMarkup()
                 classes=InlineKeyboardButton(('Manage Classes'),callback_data=f'manageClasses_{message.chat.id}')
                 lectures=InlineKeyboardButton(('Manage Lectures'),callback_data=f'manageLectures_{message.chat.id}')
                 markup.add(lectures,classes)
-                bot.send_message(message.chat.id, f'How can i help you?',reply_markup=markup)
+                bot.send_message(message.chat.id, (f'🤖How can i help you?'),reply_markup=markup)
             else:
                 group_cr.langChoosing(bot, message)
 
     @bot.message_handler(content_types=['photo', 'document', 'audio', 'video', 'voice'])
     def handle_file(message):
         if not message.caption:
-            bot.send_message(message.chat.id,'Please send file with caption that include a specific name')
+            bot.send_message(message.chat.id,('''🔹Please send file with caption that include a specific name
+            Like: Booklet of chapter one'''))
             return
         rqust=dbMig.getRequest(str(message.chat.id))
         if type(rqust) != tuple:
-            bot.send_message(message.chat.id,"You haven't request for adding file. go to your class management and create a request for add file")
+            bot.send_message(message.chat.id,("""🚫You haven't request for adding file!
+            Go to your class management and create a request for add file"""))
             return
         if rqust[2]=='add_file':
             status=file_cr.getFile(bot,message.caption,rqust[1],bool=True)
             if status:
                 _=dbMig.delRequest(str(message.chat.id))
-                bot.send_message(message.chat.id,"You already have a file with this name! change it and send again")
+                bot.send_message(message.chat.id,("🚫You already have a file with this name! change it and send again"))
                 return
             forwarded = bot.forward_message(constants.channelID,from_chat_id=message.chat.id,message_id=message.message_id)
             _=dbMig.delRequest(str(message.chat.id))
@@ -47,8 +51,10 @@ def register_handlers(bot: telebot):
     def handle_search(message):
         fileName = message.text.split("search_", 1)[1].strip()
         file_cr.search(bot,fileName,message.chat.id)
+
     @bot.callback_query_handler(func=lambda call: True)
     def handle_callback(call):
+        deleteMessage(bot,call)
         if call.data=='persian':
             group_cr.configureGroup(bot, 'fa', call)
         elif call.data=='english':
@@ -82,10 +88,10 @@ def register_handlers(bot: telebot):
                 status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
                 if status:
                     markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
+                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
                     markup.add(yes,no)
-                    bot.send_message(groupID, "Are you sure you want to delete the lecture?",reply_markup=markup)
+                    bot.send_message(groupID, ("🔸Are you sure you want to delete the lecture?"),reply_markup=markup)
 
             #Classes
             elif operate=='addClass':
@@ -100,10 +106,10 @@ def register_handlers(bot: telebot):
                 status=dbMig.addRequest(modelsID,groupID,"delete_class")
                 if status:
                     markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
+                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
                     markup.add(yes,no)
-                    bot.send_message(groupID, "Are you sure you want to delete the class?",reply_markup=markup)
+                    bot.send_message(groupID, ("🔸Are you sure you want to delete the class?"),reply_markup=markup)
 
             #Students
             elif operate=='addStudent':
@@ -125,15 +131,15 @@ def register_handlers(bot: telebot):
             elif operate == 'deleteStudent':
                 student=dbMig.getStudent(call.from_user.id,modelsID,groupID)
                 if student==None:
-                    bot.send_message(groupID,'You already not in this class')
+                    bot.send_message(groupID,('You already not in this class!'))
                     return
                 status=dbMig.addRequest(modelsID,groupID,"delete_student")
                 if status:
                     markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
+                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
                     markup.add(yes,no)
-                    bot.send_message(groupID, "Are you sure you want to delete the student?",reply_markup=markup)
+                    bot.send_message(groupID,("🔸Are you sure you want to delete the student?"),reply_markup=markup)
 
             #Exam
             elif operate == 'addExam':
@@ -141,26 +147,26 @@ def register_handlers(bot: telebot):
             elif operate == 'editExam':
                 exam_cr.editExam(bot,modelsID,groupID)
             elif operate == 'getExams':
-                exam_cr.getExams(bot,modelsID,groupID)
+                exam_cr.getAllExams(bot,modelsID,groupID)
             elif operate == 'exam':
                 exam_cr.getExam(bot,modelsID,groupID)
             elif operate == 'deleteExam':
                 status=dbMig.addRequest(modelsID,groupID,"delete_exam")
                 if status:
                     markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
+                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
                     markup.add(yes,no)
-                    bot.send_message(groupID, "Are you sure you want to delete the exam?",reply_markup=markup)
+                    bot.send_message(groupID, ("🔸Are you sure you want to delete the exam?"),reply_markup=markup)
 
             #File
             elif operate == 'addFile':
                 status=dbMig.addRequest(groupID,modelsID,'add_file')
                 if status:
                     markup=InlineKeyboardMarkup()
-                    cancel=InlineKeyboardButton('cancel adding file',callback_data=f'cancel_{groupID}')
+                    cancel=InlineKeyboardButton(('Cancel adding file'),callback_data=f'cancel_{groupID}')
                     markup.add(cancel)
-                    bot.send_message(groupID,'Please send your file with a specific name in its caption',reply_markup=markup)
+                    bot.send_message(groupID,('🔹Please send your file with a specific name in its caption'),reply_markup=markup)
             elif operate == 'getAllFiles':
                 file_cr.getAllFiles(bot,modelsID,groupID)
             elif operate == 'getFile':
@@ -169,10 +175,10 @@ def register_handlers(bot: telebot):
                 status=dbMig.addRequest(modelsID,groupID,"delete_file")
                 if status:
                     markup = InlineKeyboardMarkup()
-                    yes = InlineKeyboardButton('yes', callback_data=f"yesAnswr_{modelsID}_{groupID}")
-                    no=InlineKeyboardButton('no',callback_data=f"noAnswr_{modelsID}_{groupID}")
+                    yes = InlineKeyboardButton(('Yes'), callback_data=f"yesAnswr_{modelsID}_{groupID}")
+                    no=InlineKeyboardButton(('No'),callback_data=f"noAnswr_{modelsID}_{groupID}")
                     markup.add(yes,no)
-                    bot.send_message(groupID, "Are you sure you want to delete the file?",reply_markup=markup)
+                    bot.send_message(groupID, ("🔸Are you sure you want to delete the file?"),reply_markup=markup)
 
 
 

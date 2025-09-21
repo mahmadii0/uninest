@@ -18,28 +18,28 @@ def listen_for_events():
             match data['event']:
                 case 'lecture-added':
                     groupID = data['data']['groupID']
-                    bot.send_message(groupID, "Lecture successfully added!")
+                    bot.send_message(groupID, "✅Lecture successfully added!")
                 case 'lecture-edited':
                     groupID = data['data']['groupID']
-                    bot.send_message(groupID, "Lecture successfully edited!")
+                    bot.send_message(groupID, "✅Lecture successfully edited!")
                 case 'class-added':
                     groupID= data['data']['groupID']
-                    bot.send_message(groupID,"Class successfully added!")
+                    bot.send_message(groupID,"✅Class successfully added!")
                 case 'class-edited':
                     groupID = data['data']['groupID']
-                    bot.send_message(groupID, "Class successfully edited!")
+                    bot.send_message(groupID, "✅Class successfully edited!")
                 case 'student-added':
                     groupID= data['data']['groupID']
-                    bot.send_message(groupID,"You successfully added to this class!")
+                    bot.send_message(groupID,"✅You successfully added to this class!")
                 case 'student-edited':
                     groupID = data['data']['groupID']
-                    bot.send_message(groupID, "your info successfully edited!")
+                    bot.send_message(groupID, "✅your info successfully edited!")
                 case 'exam_added':
                     groupID = data['data']['groupID']
-                    bot.send_message(groupID, "Exam successfully added!")
+                    bot.send_message(groupID, "✅Exam successfully added!")
                 case 'exam-edited':
                     groupID = data['data']['groupID']
-                    bot.send_message(groupID, "Exam successfully edited!")
+                    bot.send_message(groupID, "✅Exam successfully edited!")
 
 threading.Thread(target=listen_for_events, daemon=True).start()
 
