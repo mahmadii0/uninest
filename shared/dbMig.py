@@ -83,6 +83,13 @@ def getLecture(lecID,groupID):
         lecture=cursor.fetchone()
         return lecture
 
+def getPicLecture(lecID,groupID):
+    with dbConnection() as cursor:
+        query='SELECT pic FROM lectures WHERE lecID=%s AND groupID=%s'
+        cursor.execute(query,(lecID,groupID,))
+        pic=cursor.fetchone()
+        return pic
+
 def getAllLecture(groupID):
     with dbConnection() as cursor:
         query='SELECT * FROM lectures WHERE groupID=%s'
@@ -127,10 +134,9 @@ def editClass(clss,groupID):
         return True
 def deleteClass(clssID,groupID):
     with dbConnection() as cursor:
-        with dbConnection() as cursor:
-            query = 'DELETE FROM classes WHERE classID=%s and groupID=%s'
-            cursor.execute(query, (clssID, groupID,))
-            return True
+        query = 'DELETE FROM classes WHERE classID=%s and groupID=%s'
+        cursor.execute(query, (clssID, groupID,))
+        return True
 #Student
 def addStudent(student,groupID):
     with dbConnection() as cursor:
@@ -164,8 +170,14 @@ def editStudent(student,groupID):
 def deleteStudent(studentID,classID,groupID):
     with dbConnection() as cursor:
         query = 'DELETE FROM student_class_relation WHERE studentID=%s and groupID=%s and classID=%s'
-        cursor.execute(query, (studentID, groupID,classID))
+        cursor.execute(query, (studentID, groupID,classID,))
         return True
+
+def deleteClassStds(classID,groupID):
+    with dbConnection() as cursor:
+        query='DELETE FROM student_class_relation WHERE classID=%s and groupID=%s'
+        cursor.execute(query,(classID,groupID,))
+
 #Exam
 def addExam(exam):
     with dbConnection() as cursor:
@@ -195,9 +207,14 @@ def getExam(examID):
 
 def deleteExam(examID):
     with dbConnection() as cursor:
-        query = 'DELETE FROM exams WHERE examID=%s'
+        query ='DELETE FROM exams WHERE examID=%s'
         cursor.execute(query, (examID,))
         return True
+
+def deleteClassExams(classID):
+    with dbConnection() as cursor:
+        query='DELETE FROM exams WHERE classID=%s'
+        cursor.execute(query,(classID,))
 
 #File
 def addFile(file):
@@ -232,3 +249,8 @@ def deleteFile(address):
         query='DELETE FROM files WHERE address=%s'
         cursor.execute(query,(address,))
         return True
+
+def deleteClassFiles(classID):
+    with dbConnection() as cursor:
+        query='DELETE FROM files WHERE classID=%s'
+        cursor.execute(query,(classID,))

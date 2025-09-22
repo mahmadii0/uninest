@@ -6,7 +6,7 @@ from shared import dbMig
 def search(bot,fileName,groupID):
     file=dbMig.searchFile(fileName,groupID)
     if file == None:
-        bot.send_message(groupID,("The file isn't find"))
+        bot.send_message(groupID,("🤖The file isn't find"))
         return
     getFile(bot,file[1],groupID)
 
@@ -24,19 +24,19 @@ def getFile(bot,fileName,classID,bool=False):
         delete=InlineKeyboardButton(('Delete'),callback_data=f'deleteFile_{address}_{groupID}')
         markup.add(delete)
         bot.forward_message(groupID,from_chat_id=constants.channelID,message_id=address)
-        bot.send_message(groupID,('for deleting this file,Click the button below:'), reply_markup=markup)
+        bot.send_message(groupID,('🔹For deleting this file,Click the button below:'), reply_markup=markup)
 
 def getAllFiles(bot,classID,groupID):
     list=dbMig.getAllFiles(classID)
     if list==None:
-        bot.send_message(("Your request for getting all files, failed"))
+        bot.send_message(groupID,("🚫Your request for getting all files, failed"))
     markup=InlineKeyboardMarkup()
     for item in list:
         btn=InlineKeyboardButton(item[0],callback_data=f'getFile_{item[1]}_{groupID}')
         markup.add(btn)
-    back = InlineKeyboardButton(('Back'), callback_data=f'class_{classID}_{groupID}')
+    back = InlineKeyboardButton(('↩️Back'), callback_data=f'class_{classID}_{groupID}')
     markup.add(back)
-    bot.send_message(groupID,('For access to a specify file, click on its button:'),reply_markup=markup)
+    bot.send_message(groupID,('🤖For access to a specify file, click on its button:'),reply_markup=markup)
 
 
 def addFile(bot,fileName,fileAddress,classID,groupID):
@@ -47,11 +47,11 @@ def addFile(bot,fileName,fileAddress,classID,groupID):
     )
     status=dbMig.addFile(file)
     if status:
-        bot.send_message(groupID,('The file successfully added to class files'))
+        bot.send_message(groupID,('✅The file successfully added to class files'))
 
 def deleteFile(bot,address,groupID):
     status = dbMig.deleteFile(address)
     if status:
         status = dbMig.delRequest(address)
         if status:
-            bot.send_message(groupID, ("The file successfully deleted"))
+            bot.send_message(groupID, ("✅The file successfully deleted"))

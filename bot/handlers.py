@@ -7,7 +7,7 @@ from shared import dbMig, constants
 from utils import deleteMessage,checkAdmin
 
 def accessDenied(bot,groupID):
-    bot.send_message(groupID, "🚫Just the owner or admin of the group can to that!")
+    bot.send_message(groupID, "🚫Just the owner or admin of the group can do that!")
 
 def register_handlers(bot: telebot):
     @bot.message_handler(commands=['start'])

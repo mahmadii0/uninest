@@ -5,7 +5,7 @@ def rand(randnums):
     if num in randnums:
         return rand(randnums)
     else:
-        return
+        return num
 
 def checkAdmin(bot,groupID,userID):
     member = bot.get_chat_member(groupID,userID)

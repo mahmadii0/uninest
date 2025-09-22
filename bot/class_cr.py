@@ -61,7 +61,10 @@ def editClass(bot,classID,groupID):
     bot.send_message(groupID,('🔹Yeah! Now you can edit the class from this url:') + '\n' + f'http://127.0.0.1:8000/edit-class/{classID}')
 
 def deleteClass(bot,classID,groupID):
-    status = dbMig.deleteClass(classID, groupID)
+    dbMig.deleteClassStds(classID,groupID)
+    dbMig.deleteClassExams(classID)
+    dbMig.deleteClassFiles(classID)
+    status = dbMig.deleteClass(classID,groupID)
     if status:
         status = dbMig.delRequest(classID)
         if status:

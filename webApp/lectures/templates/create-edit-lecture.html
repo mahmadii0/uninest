@@ -15,7 +15,7 @@
                 Toggle Dark Mode
             </button>
         </div>
-        <form class="space-y-4" method="POST">
+        <form class="space-y-4" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
                 <label for="name" class="block text-sm font-medium mb-1">Lecture Name</label>
