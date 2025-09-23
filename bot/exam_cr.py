@@ -1,5 +1,7 @@
 from telebot.types import InlineKeyboardButton,InlineKeyboardMarkup
 from shared import dbMig
+from datetime import datetime, timedelta
+from webApp.utils.utils import publishEvent
 
 def addExam(bot,classID,groupID):
     status = dbMig.addRequest(classID, groupID, "add_exam")
@@ -13,6 +15,13 @@ def editExam(bot,examID,groupID):
         bot.send_message(groupID, ('🚫Error while adding request'))
     bot.send_message(groupID,('🔹Yeah! Now you can edit the exam from this url:') + '\n' + f'http://127.0.0.1:8000/edit-exam/{examID}')
 
+def activeReminder(examID,groupID):
+    publishEvent("activeReminder", {'examID':examID,'groupID':groupID})
+
+
+def deactiveReminder(examID,groupID):
+    publishEvent("deactiveReminder", {'examID': examID, 'groupID': groupID})
+
 def getAllExams(bot,classID,groupID):
     list = dbMig.getExams(classID)
     if list == None:
@@ -20,7 +29,7 @@ def getAllExams(bot,classID,groupID):
     wholeMessage = ""
     markup = InlineKeyboardMarkup()
     for item in list:
-        message = (f"Title: ")+f"{item[1]}"+("\n Date: ")+f"{item[3]}"+"\n-----------------"
+        message = (f"Title: ")+f"{item[1]}"+("\n Date: ")+f"{item[3]}"+"\n-----------------\n"
         wholeMessage = wholeMessage + message
         btn = InlineKeyboardButton(f'{item[1]}', callback_data=f"exam_{item[0]}_{groupID}")
         markup.add(btn)
@@ -35,8 +44,13 @@ def getExam(bot,examID,groupID):
     message = ("Title: ")+f"{exam[1]}"+("\n Date: ")+f"{exam[3]}"
     markup = InlineKeyboardMarkup()
     edit = InlineKeyboardButton(('Edit'), callback_data=f'editExam_{exam[0]}_{groupID}')
+    if exam[4]!='0':
+        reminder=InlineKeyboardButton(('🔴DeActive Reminder'),callback_data=f"deactive_{exam[0]}_{groupID}")
+    else:
+        reminder=InlineKeyboardButton(('🟢Active Reminder'),callback_data=f"active_{exam[0]}_{groupID}")
     delete = InlineKeyboardButton(('Delete'), callback_data=f"deleteExam_{exam[0]}_{groupID}")
-    markup.add(delete,edit)
+    markup.add(edit,reminder)
+    markup.add(delete)
     bot.send_message(groupID, message, reply_markup=markup)
 
 def deleteExam(bot,examID,groupID):

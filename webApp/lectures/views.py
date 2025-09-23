@@ -25,7 +25,16 @@ def addLecture(request,token):
             save_dir = os.path.join(settings.MEDIA_ROOT, 'lectures')
             os.makedirs(save_dir, exist_ok=True)
             _num=utils.rand(randnums)
-            picPath = os.path.join(save_dir, pic.name+str(_num))
+            i = 0
+            while i < len(pic.name):
+                if pic.name[i] == '.' and pic.name[i + 1] == 'p' and pic.name[i+2]== 'n':
+                    pic.name = pic.name[:i] + str(_num) + pic.name[i:]
+                    break
+                elif pic.name[i] == '.' and pic.name[i + 1] == 'j' and pic.name[i+2]== 'g':
+                    pic.name = pic.name[:i] + str(_num) + pic.name[i:]
+                    break
+                i += 1
+            picPath = os.path.join(save_dir, pic.name)
 
             # save file to disk
             with default_storage.open(picPath, 'wb+') as dest:
@@ -33,12 +42,8 @@ def addLecture(request,token):
                     dest.write(chunk)
 
             # relative path for DB
-            picPath = f'lectures/{pic.name.lower()}'
-            i=0
-            while i<len(picPath):
-                if picPath[i] == '.' and picPath[i+1]== 'p':
-                    picPath=picPath[:i+1]+str(_num)+picPath[i+1:]
-                i+=1
+            picPath = f'lectures\\{pic.name}'
+
         else:
             picPath=""
         lecture=Lecture(
@@ -80,7 +85,16 @@ def editLecture(request,token):
             save_dir = os.path.join(settings.MEDIA_ROOT, 'lectures')
             os.makedirs(save_dir, exist_ok=True)
             _num=utils.rand(randnums)
-            picPath = os.path.join(save_dir, pic.name+str(_num))
+            i = 0
+            while i < len(pic.name):
+                if pic.name[i] == '.' and pic.name[i + 1] == 'p' and pic.name[i+2]== 'n':
+                    pic.name = pic.name[:i] + str(_num) + pic.name[i:]
+                    break
+                elif pic.name[i] == '.' and pic.name[i + 1] == 'j' and pic.name[i+2]== 'g':
+                    pic.name = pic.name[:i] + str(_num) + pic.name[i:]
+                    break
+                i += 1
+            picPath = os.path.join(save_dir, pic.name)
 
             # save file to disk
             with default_storage.open(picPath, 'wb+') as dest:
@@ -88,12 +102,7 @@ def editLecture(request,token):
                     dest.write(chunk)
 
             # relative path for DB
-            picPath = f'lectures/{pic.name.lower()}'
-            i = 0
-            while i < len(picPath):
-                if picPath[i] == '.' and picPath[i + 1] == 'p':
-                    picPath = picPath[:i + 1] + str(_num) + picPath[i + 1:]
-                i += 1
+            picPath = f'lectures\\{pic.name}'
         else:
             picPath=""
         lecture=Lecture(
@@ -102,11 +111,21 @@ def editLecture(request,token):
             pic=picPath,
             rate=request.POST.get('rate')
         )
+        i=0
+        while i<len(lecture.phone):
+            if lecture.phone[i] == ' ':
+                if i==0:
+                    lecture.phone=lecture.phone[i+1:]
+                else:
+                    lecture.phone=lecture.phone[:i]+lecture.phone[i+1:]
+            i+=1
+
         lecture.lecID=token
         oldPic=dbMig.getPicLecture(lecture.lecID,groupID)
         oldPicPath=os.path.join(settings.MEDIA_ROOT,oldPic[0])
         if os.path.exists(oldPicPath):
             os.remove(oldPicPath)
+
         if len(lecture.name)>100 or lecture.name == None:
             print('error in name')
             return HttpResponse("Bad Request", status=400)

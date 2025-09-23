@@ -26,7 +26,7 @@ def getAllClass(bot,groupID):
     markup = InlineKeyboardMarkup()
     for item in list:
         lec=dbMig.getLecture(item[2],groupID)
-        message = ((" Class name: ")+f"{item[1]}"+("\n Lecture: ")+f"{lec[1]}"+"\n-----------------")
+        message = ((" Class name: ")+f"{item[1]}"+("\n Lecture: ")+f"{lec[1]}"+"\n-----------------\n")
         wholeMessage = wholeMessage + message
         btn = InlineKeyboardButton(f'{item[1]}', callback_data=f"class_{item[0]}_{groupID}")
         markup.add(btn)

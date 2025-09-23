@@ -103,6 +103,18 @@ def editLecture(lecture,groupID):
         cursor.execute(query,(lecture.name,lecture.phone,float(lecture.rate),lecture.pic,lecture.lecID,groupID,))
         return True
 
+def increaseRate(lecID,groupID):
+    with dbConnection() as cursor:
+        query='UPDATE lectures SET rate=rate+0.5 WHERE lecID=%s and groupID=%s'
+        cursor.execute(query,(lecID,groupID,))
+        return True
+
+def decreaseRate(lecID,groupID):
+    with dbConnection() as cursor:
+        query='UPDATE lectures SET rate=rate-0.5 WHERE lecID=%s and groupID=%s'
+        cursor.execute(query,(lecID,groupID,))
+        return True
+
 def deleteLecture(lecID,groupID):
     with dbConnection() as cursor:
         query='DELETE FROM lectures WHERE lecID=%s and groupID=%s'
@@ -158,7 +170,7 @@ def getStudent(studentID,classID,groupID):
         return std
 def getAllStudent(classID,groupID):
     with dbConnection() as cursor:
-        query='''SELECT students.std_name, students.username FROM student_class_relation INNER JOIN students ON student_class_relation.studentID=students.studentID WHERE student_class_relation.classID=%s and student_class_relation.groupID=%s'''
+        query='''SELECT students.std_name, students.username, students.studentID FROM student_class_relation INNER JOIN students ON student_class_relation.studentID=students.studentID WHERE student_class_relation.classID=%s and student_class_relation.groupID=%s'''
         cursor.execute(query,(classID,groupID,))
         list=cursor.fetchall()
         return list
@@ -181,8 +193,20 @@ def deleteClassStds(classID,groupID):
 #Exam
 def addExam(exam):
     with dbConnection() as cursor:
-        query='INSERT INTO exams(title,classID,date_time) VALUES(%s,%s,%s)'
+        query='INSERT INTO exams(title,classID,date_time,reminder) VALUES(%s,%s,%s,"0")'
         cursor.execute(query,(exam.title,exam.classID,exam.dateTime,))
+        return True
+
+def activeReminder(jobID,examID):
+    with dbConnection() as cursor:
+        query='UPDATE exams SET reminder=%s WHERE examID=%s'
+        cursor.execute(query,(jobID,examID,))
+        return True
+
+def deactiveReminder(examID):
+    with dbConnection() as cursor:
+        query='UPDATE exams SET reminder=0 WHERE examID=%s'
+        cursor.execute(query,(examID,))
         return True
 
 def editExam(exam,examID):

@@ -23,7 +23,7 @@ def getAllStudent(bot,classID,groupID):
     wholeMessage = ""
     markup = InlineKeyboardMarkup()
     for item in list:
-        message = ("Student name: ")+f"{item[0]}"+("\n Username: ")+f"{item[1]}"+"\n-----------------"
+        message = ("Student name: ")+f"{item[0]}"+("\n Username: ")+f"{item[1]}"+"\n-----------------\n"
         wholeMessage = wholeMessage + message
         btn = InlineKeyboardButton(f'{item[1]}', callback_data=f"student_{item[0]}_{groupID}")
         markup.add(btn)

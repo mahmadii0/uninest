@@ -17,4 +17,6 @@ def checkAdmin(bot,groupID,userID):
 def deleteMessage(bot,call):
     if call.data =='getAllLectures' or call.data == 'getAllClasses':
         return
+    if 'like' in call.data or 'dislike' in call.data:
+        return
     bot.delete_message(call.message.chat.id, call.message.message_id)

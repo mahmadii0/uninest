@@ -6,6 +6,8 @@ import file_cr
 from shared import dbMig, constants
 from utils import deleteMessage,checkAdmin
 
+users=[]
+
 def accessDenied(bot,groupID):
     bot.send_message(groupID, "🚫Just the owner or admin of the group can do that!")
 
@@ -96,6 +98,17 @@ def register_handlers(bot: telebot):
                     lecture_cr.editLecture(bot,modelsID,groupID)
                 else:
                     accessDenied(bot, call.message.chat.id)
+            elif operate=='like':
+                if call.from_user.id in users:
+                    bot.answer_callback_query(callback_query_id=call.id, text=("You already voted!"), show_alert=True)
+                else:
+                    lecture_cr.increaseRate(bot,call,modelsID,groupID)
+                    users.append(call.from_user.id)
+            elif operate=='dislike':
+                if call.from_user.id in users:
+                    bot.answer_callback_query(callback_query_id=call.id, text=("You already voted!"), show_alert=True)
+                else:
+                    lecture_cr.decreaseRate(bot,call,modelsID,groupID)
             elif operate == 'deleteLecture':
                 if status:
                     status=dbMig.addRequest(modelsID,groupID,"delete_lecture")
@@ -176,6 +189,16 @@ def register_handlers(bot: telebot):
                     exam_cr.editExam(bot,modelsID,groupID)
                 else:
                     accessDenied(bot, call.message.chat.id)
+            elif operate == 'active':
+                if status:
+                    exam_cr.activeReminder(modelsID,groupID)
+                else:
+                    accessDenied(bot,call.message.chat.id)
+            elif operate == 'deactive':
+                if status:
+                    exam_cr.deactiveReminder(modelsID,groupID)
+                else:
+                    accessDenied(bot,call.message.chat.id)
             elif operate == 'getExams':
                 exam_cr.getAllExams(bot,modelsID,groupID)
             elif operate == 'exam':
