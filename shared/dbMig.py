@@ -45,6 +45,23 @@ def getGroupIDs():
         list=cursor.fetchall()
         return list
 
+def getGroupLang(groupID=None,classID=None):
+    with dbConnection() as cursor:
+        if classID == None and groupID != None:
+            query='SELECT lang FROM botgroups WHERE groupID=%s'
+            cursor.execute(query,(groupID,))
+            lang=cursor.fetchone()
+            return lang[0]
+        elif classID != None and groupID == None:
+            query = 'SELECT groupID FROM classes WHERE classID=%s'
+            cursor.execute(query,(classID,))
+            groupID=cursor.fetchone()
+            groupID=groupID[0]
+            query = 'SELECT lang FROM botgroups WHERE groupID=%s'
+            cursor.execute(query, (groupID,))
+            lang = cursor.fetchone()
+            return lang[0]
+
 def addGroup(group):
     with dbConnection() as cursor:
         query='INSERT INTO botgroups VALUES(%s,%s,%s)'

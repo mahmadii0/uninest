@@ -1,0 +1,425 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 21:20+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bot.py:30
+msgid "✅Lecture successfully added!"
+msgstr ""
+
+#: bot.py:33
+msgid "✅Lecture successfully edited!"
+msgstr ""
+
+#: bot.py:36
+msgid "✅Class successfully added!"
+msgstr ""
+
+#: bot.py:39
+msgid "✅Class successfully edited!"
+msgstr ""
+
+#: bot.py:42
+msgid "✅You successfully added to this class!"
+msgstr ""
+
+#: bot.py:45
+msgid "✅your info successfully edited!"
+msgstr ""
+
+#: bot.py:48
+msgid "✅Exam successfully added!"
+msgstr ""
+
+#: bot.py:51
+msgid "✅Exam successfully edited!"
+msgstr ""
+
+#: bot.py:61
+msgid "✅The Reminder successfully activated"
+msgstr ""
+
+#: bot.py:69
+msgid "✅The Reminder successfully deactivated"
+msgstr ""
+
+#: handlers.py:13
+msgid "🚫Just the owner or admin of the group can do that!"
+msgstr ""
+
+#: handlers.py:20
+msgid "welcome to UniNest"
+msgstr ""
+
+#: handlers.py:24 group_cr.py:33
+msgid "Manage Classes"
+msgstr ""
+
+#: handlers.py:25 group_cr.py:34
+msgid "Manage Lectures"
+msgstr ""
+
+#: handlers.py:27
+msgid "🤖How can i help you?"
+msgstr ""
+
+#: handlers.py:34
+msgid "🔹Please send file with caption that include a specific name"
+msgstr ""
+
+#: handlers.py:34
+msgid ""
+"\n"
+" Like: Booklet of chapter one"
+msgstr ""
+
+#: handlers.py:39
+msgid ""
+"🚫You haven't request for adding file!\n"
+"            Go to your class management and create a request for add file"
+msgstr ""
+
+#: handlers.py:46
+msgid "🚫You already have a file with this name! change it and send again"
+msgstr ""
+
+#: handlers.py:104 handlers.py:110
+msgid "You already voted!"
+msgstr ""
+
+#: handlers.py:118 handlers.py:145 handlers.py:177 handlers.py:212
+#: handlers.py:239
+msgid "Yes"
+msgstr ""
+
+#: handlers.py:119 handlers.py:146 handlers.py:178 handlers.py:213
+#: handlers.py:240
+msgid "No"
+msgstr ""
+
+#: handlers.py:121
+msgid "🔸Are you sure you want to delete the lecture?"
+msgstr ""
+
+#: handlers.py:148
+msgid "🔸Are you sure you want to delete the class?"
+msgstr ""
+
+#: handlers.py:172
+msgid "You already not in this class!"
+msgstr ""
+
+#: handlers.py:180
+msgid "🔸Are you sure you want to delete the student?"
+msgstr ""
+
+#: handlers.py:215
+msgid "🔸Are you sure you want to delete the exam?"
+msgstr ""
+
+#: handlers.py:225
+msgid "Cancel adding file"
+msgstr ""
+
+#: handlers.py:227
+msgid "🔹Please send your file with a specific name in its caption"
+msgstr ""
+
+#: handlers.py:242
+msgid "🔸Are you sure you want to delete the file?"
+msgstr ""
+
+#: handlers.py:266
+msgid "🔸Delete process was canceled"
+msgstr ""
+
+#: handlers.py:270
+msgid "🔸Adding file process was canceled"
+msgstr ""
+
+#: class_cr.py:9
+msgid "Add Class"
+msgstr ""
+
+#: class_cr.py:10
+msgid "Get All Classes"
+msgstr ""
+
+#: class_cr.py:12 lecture_cr.py:16
+msgid "🤖Select a one of buttons to do that"
+msgstr ""
+
+#: class_cr.py:18 class_cr.py:60 exam_cr.py:10 exam_cr.py:16 lecture_cr.py:22
+#: lecture_cr.py:65
+msgid "🚫Error while adding request"
+msgstr ""
+
+#: class_cr.py:19
+msgid "🔹Yeah! Now you can add the class from this url:"
+msgstr ""
+
+#: class_cr.py:24
+msgid "🚫Your request for getting all classes, failed"
+msgstr ""
+
+#: class_cr.py:29 class_cr.py:42
+msgid "Class name: "
+msgstr ""
+
+#: class_cr.py:29 class_cr.py:42
+msgid ""
+"\n"
+" Lecture: "
+msgstr ""
+
+#: class_cr.py:33 class_cr.py:53 exam_cr.py:37 file_cr.py:38
+msgid "↩️Back"
+msgstr ""
+
+#: class_cr.py:35
+msgid ""
+"\n"
+"🔹The number of classes: "
+msgstr ""
+
+#: class_cr.py:40
+msgid "🚫Your request for getting class, failed"
+msgstr ""
+
+#: class_cr.py:44 exam_cr.py:47 lecture_cr.py:47 student_cr.py:41
+msgid "Edit"
+msgstr ""
+
+#: class_cr.py:45 exam_cr.py:52 file_cr.py:25 lecture_cr.py:48 student_cr.py:42
+msgid "Delete"
+msgstr ""
+
+#: class_cr.py:46
+msgid "📋Exams"
+msgstr ""
+
+#: class_cr.py:47
+msgid "📋Add Exam"
+msgstr ""
+
+#: class_cr.py:48
+msgid "💾Add File To Class"
+msgstr ""
+
+#: class_cr.py:49
+msgid "💾Get All Files"
+msgstr ""
+
+#: class_cr.py:50
+msgid "🧑‍🎓Add Me As Student"
+msgstr ""
+
+#: class_cr.py:51
+msgid "🧑‍🎓Delete Me From Class"
+msgstr ""
+
+#: class_cr.py:52
+msgid "🧑‍🎓Get All Students"
+msgstr ""
+
+#: class_cr.py:61
+msgid "🔹Yeah! Now you can edit the class from this url:"
+msgstr ""
+
+#: class_cr.py:71
+msgid "✅The class successfully deleted"
+msgstr ""
+
+#: exam_cr.py:11
+msgid "🔹Yeah! Now you can add the exam from this url:"
+msgstr ""
+
+#: exam_cr.py:17
+msgid "🔹Yeah! Now you can edit the exam from this url:"
+msgstr ""
+
+#: exam_cr.py:29
+msgid "🚫Your request for getting exams, failed"
+msgstr ""
+
+#: exam_cr.py:33 exam_cr.py:45
+msgid "Title: "
+msgstr ""
+
+#: exam_cr.py:33
+msgid ""
+"\n"
+" Date: "
+msgstr ""
+
+#: exam_cr.py:39
+msgid ""
+"\n"
+"🔹The number of exams: "
+msgstr ""
+
+#: exam_cr.py:44
+msgid "Your request for getting exam, failed"
+msgstr ""
+
+#: exam_cr.py:49
+msgid "🔴DeActive Reminder"
+msgstr ""
+
+#: exam_cr.py:51
+msgid "🟢Active Reminder"
+msgstr ""
+
+#: exam_cr.py:62 student_cr.py:51
+msgid "✅The student successfully deleted"
+msgstr ""
+
+#: file_cr.py:10
+msgid "🤖The file isn't find"
+msgstr ""
+
+#: file_cr.py:28
+msgid "🔹For deleting this file,Click the button below:"
+msgstr ""
+
+#: file_cr.py:33
+msgid "🚫Your request for getting all files, failed"
+msgstr ""
+
+#: file_cr.py:40
+msgid "🤖For access to a specify file, click on its button:"
+msgstr ""
+
+#: file_cr.py:51
+msgid "✅The file successfully added to class files"
+msgstr ""
+
+#: file_cr.py:58
+msgid "✅The file successfully deleted"
+msgstr ""
+
+#: group_cr.py:36
+msgid "🤖Your Group successfully registered!"
+msgstr ""
+
+#: lecture_cr.py:13
+msgid "Add Lecture"
+msgstr ""
+
+#: lecture_cr.py:14
+msgid "Get All Lectures"
+msgstr ""
+
+#: lecture_cr.py:23
+msgid "🔹Yeah! Now you can add the lecture from this url:"
+msgstr ""
+
+#: lecture_cr.py:29
+msgid "🚫Your request for getting all lectures, failed"
+msgstr ""
+
+#: lecture_cr.py:33
+msgid "Lecture Name: "
+msgstr ""
+
+#: lecture_cr.py:33
+msgid ""
+"\n"
+" Phone: "
+msgstr ""
+
+#: lecture_cr.py:33
+msgid ""
+"\n"
+" Rate: "
+msgstr ""
+
+#: lecture_cr.py:37 lecture_cr.py:51 student_cr.py:31
+msgid "Back"
+msgstr ""
+
+#: lecture_cr.py:39
+msgid ""
+"\n"
+"🔹The number of lectures: "
+msgstr ""
+
+#: lecture_cr.py:44
+msgid "🚫Your request for getting lecture, failed"
+msgstr ""
+
+#: lecture_cr.py:45
+msgid "Lecture name: "
+msgstr ""
+
+#: lecture_cr.py:45
+msgid ""
+"\n"
+"Phone: "
+msgstr ""
+
+#: lecture_cr.py:45
+msgid ""
+"\n"
+"Rate: "
+msgstr ""
+
+#: lecture_cr.py:66
+msgid "🔹Yeah! Now you can edit the lecture from this url:"
+msgstr ""
+
+#: lecture_cr.py:71 lecture_cr.py:76
+msgid "Your vote registed!"
+msgstr ""
+
+#: lecture_cr.py:89
+msgid "✅The lecture successfully deleted"
+msgstr ""
+
+#: lecture_cr.py:92
+msgid ""
+"🚫You can't delete the lecture because this has already been selected for a "
+"classe"
+msgstr ""
+
+#: student_cr.py:18
+msgid "🤖Now, you added to this class "
+msgstr ""
+
+#: student_cr.py:23
+msgid "🚫Your request for getting all students, failed"
+msgstr ""
+
+#: student_cr.py:27 student_cr.py:39
+msgid "Student name: "
+msgstr ""
+
+#: student_cr.py:27 student_cr.py:39
+msgid ""
+"\n"
+" Username: "
+msgstr ""
+
+#: student_cr.py:33
+msgid ""
+"\n"
+"🔹The number of students: "
+msgstr ""
+
+#: student_cr.py:38
+msgid "🚫Your request for getting student, failed"
+msgstr ""

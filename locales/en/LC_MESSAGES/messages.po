@@ -1,0 +1,453 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 21:20+0330\n"
+"PO-Revision-Date: 2025-09-23 21:26+0330\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bot.py:30
+msgid "✅Lecture successfully added!"
+msgstr "✅Lecture successfully added!"
+
+#: bot.py:33
+msgid "✅Lecture successfully edited!"
+msgstr "✅Lecture successfully edited!"
+
+#: bot.py:36
+msgid "✅Class successfully added!"
+msgstr "✅Class successfully added!"
+
+#: bot.py:39
+msgid "✅Class successfully edited!"
+msgstr "✅Class successfully edited!"
+
+#: bot.py:42
+msgid "✅You successfully added to this class!"
+msgstr "✅You successfully added to this class!"
+
+#: bot.py:45
+msgid "✅your info successfully edited!"
+msgstr "✅your info successfully edited!"
+
+#: bot.py:48
+msgid "✅Exam successfully added!"
+msgstr "✅Exam successfully added!"
+
+#: bot.py:51
+msgid "✅Exam successfully edited!"
+msgstr "✅Exam successfully edited!"
+
+#: bot.py:61
+msgid "✅The Reminder successfully activated"
+msgstr "✅The Reminder successfully activated"
+
+#: bot.py:69
+msgid "✅The Reminder successfully deactivated"
+msgstr "✅The Reminder successfully deactivated"
+
+#: handlers.py:13
+msgid "🚫Just the owner or admin of the group can do that!"
+msgstr "🚫Just the owner or admin of the group can do that!"
+
+#: handlers.py:20
+msgid "welcome to UniNest"
+msgstr "welcome to UniNest"
+
+#: handlers.py:24 group_cr.py:33
+msgid "Manage Classes"
+msgstr "Manage Classes"
+
+#: handlers.py:25 group_cr.py:34
+msgid "Manage Lectures"
+msgstr "Manage Lectures"
+
+#: handlers.py:27
+msgid "🤖How can i help you?"
+msgstr "🤖How can i help you?"
+
+#: handlers.py:34
+msgid "🔹Please send file with caption that include a specific name"
+msgstr "🔹Please send file with caption that include a specific name"
+
+#: handlers.py:34
+msgid ""
+"\n"
+" Like: Booklet of chapter one"
+msgstr ""
+"\n"
+" Like: Booklet of chapter one"
+
+#: handlers.py:39
+msgid ""
+"🚫You haven't request for adding file!\n"
+"            Go to your class management and create a request for add file"
+msgstr ""
+"🚫You haven't request for adding file!\n"
+"            Go to your class management and create a request for add file"
+
+#: handlers.py:46
+msgid "🚫You already have a file with this name! change it and send again"
+msgstr "🚫You already have a file with this name! change it and send again"
+
+#: handlers.py:104 handlers.py:110
+msgid "You already voted!"
+msgstr "You already voted!"
+
+#: handlers.py:118 handlers.py:145 handlers.py:177 handlers.py:212
+#: handlers.py:239
+msgid "Yes"
+msgstr "Yes"
+
+#: handlers.py:119 handlers.py:146 handlers.py:178 handlers.py:213
+#: handlers.py:240
+msgid "No"
+msgstr "No"
+
+#: handlers.py:121
+msgid "🔸Are you sure you want to delete the lecture?"
+msgstr "🔸Are you sure you want to delete the lecture?"
+
+#: handlers.py:148
+msgid "🔸Are you sure you want to delete the class?"
+msgstr "🔸Are you sure you want to delete the class?"
+
+#: handlers.py:172
+msgid "You already not in this class!"
+msgstr "You already not in this class!"
+
+#: handlers.py:180
+msgid "🔸Are you sure you want to delete the student?"
+msgstr "🔸Are you sure you want to delete the student?"
+
+#: handlers.py:215
+msgid "🔸Are you sure you want to delete the exam?"
+msgstr "🔸Are you sure you want to delete the exam?"
+
+#: handlers.py:225
+msgid "Cancel adding file"
+msgstr "Cancel adding file"
+
+#: handlers.py:227
+msgid "🔹Please send your file with a specific name in its caption"
+msgstr "🔹Please send your file with a specific name in its caption"
+
+#: handlers.py:242
+msgid "🔸Are you sure you want to delete the file?"
+msgstr "🔸Are you sure you want to delete the file?"
+
+#: handlers.py:266
+msgid "🔸Delete process was canceled"
+msgstr "🔸Delete process was canceled"
+
+#: handlers.py:270
+msgid "🔸Adding file process was canceled"
+msgstr "🔸Adding file process was canceled"
+
+#: class_cr.py:9
+msgid "Add Class"
+msgstr "Add Class"
+
+#: class_cr.py:10
+msgid "Get All Classes"
+msgstr "Get All Classes"
+
+#: class_cr.py:12 lecture_cr.py:16
+msgid "🤖Select a one of buttons to do that"
+msgstr "🤖Select a one of buttons to do that"
+
+#: class_cr.py:18 class_cr.py:60 exam_cr.py:10 exam_cr.py:16 lecture_cr.py:22
+#: lecture_cr.py:65
+msgid "🚫Error while adding request"
+msgstr "🚫Error while adding request"
+
+#: class_cr.py:19
+msgid "🔹Yeah! Now you can add the class from this url:"
+msgstr "🔹Yeah! Now you can add the class from this url:"
+
+#: class_cr.py:24
+msgid "🚫Your request for getting all classes, failed"
+msgstr "🚫Your request for getting all classes, failed"
+
+#: class_cr.py:29 class_cr.py:42
+msgid "Class name: "
+msgstr "Class name: "
+
+#: class_cr.py:29 class_cr.py:42
+msgid ""
+"\n"
+" Lecture: "
+msgstr ""
+"\n"
+" Lecture: "
+
+#: class_cr.py:33 class_cr.py:53 exam_cr.py:37 file_cr.py:38
+msgid "↩️Back"
+msgstr "↩️Back"
+
+#: class_cr.py:35
+msgid ""
+"\n"
+"🔹The number of classes: "
+msgstr ""
+"\n"
+"🔹The number of classes: "
+
+#: class_cr.py:40
+msgid "🚫Your request for getting class, failed"
+msgstr "🚫Your request for getting class, failed"
+
+#: class_cr.py:44 exam_cr.py:47 lecture_cr.py:47 student_cr.py:41
+msgid "Edit"
+msgstr "Edit"
+
+#: class_cr.py:45 exam_cr.py:52 file_cr.py:25 lecture_cr.py:48 student_cr.py:42
+msgid "Delete"
+msgstr "Delete"
+
+#: class_cr.py:46
+msgid "📋Exams"
+msgstr "📋Exams"
+
+#: class_cr.py:47
+msgid "📋Add Exam"
+msgstr "📋Add Exam"
+
+#: class_cr.py:48
+msgid "💾Add File To Class"
+msgstr "💾Add File To Class"
+
+#: class_cr.py:49
+msgid "💾Get All Files"
+msgstr "💾Get All Files"
+
+#: class_cr.py:50
+msgid "🧑‍🎓Add Me As Student"
+msgstr "🧑‍🎓Add Me As Student"
+
+#: class_cr.py:51
+msgid "🧑‍🎓Delete Me From Class"
+msgstr "🧑‍🎓Delete Me From Class"
+
+#: class_cr.py:52
+msgid "🧑‍🎓Get All Students"
+msgstr "🧑‍🎓Get All Students"
+
+#: class_cr.py:61
+msgid "🔹Yeah! Now you can edit the class from this url:"
+msgstr "🔹Yeah! Now you can edit the class from this url:"
+
+#: class_cr.py:71
+msgid "✅The class successfully deleted"
+msgstr "✅The class successfully deleted"
+
+#: exam_cr.py:11
+msgid "🔹Yeah! Now you can add the exam from this url:"
+msgstr "🔹Yeah! Now you can add the exam from this url:"
+
+#: exam_cr.py:17
+msgid "🔹Yeah! Now you can edit the exam from this url:"
+msgstr "🔹Yeah! Now you can edit the exam from this url:"
+
+#: exam_cr.py:29
+msgid "🚫Your request for getting exams, failed"
+msgstr "🚫Your request for getting exams, failed"
+
+#: exam_cr.py:33 exam_cr.py:45
+msgid "Title: "
+msgstr "Title: "
+
+#: exam_cr.py:33
+msgid ""
+"\n"
+" Date: "
+msgstr ""
+"\n"
+" Date: "
+
+#: exam_cr.py:39
+msgid ""
+"\n"
+"🔹The number of exams: "
+msgstr ""
+"\n"
+"🔹The number of exams: "
+
+#: exam_cr.py:44
+msgid "Your request for getting exam, failed"
+msgstr "Your request for getting exam, failed"
+
+#: exam_cr.py:49
+msgid "🔴DeActive Reminder"
+msgstr "🔴DeActive Reminder"
+
+#: exam_cr.py:51
+msgid "🟢Active Reminder"
+msgstr "🟢Active Reminder"
+
+#: exam_cr.py:62 student_cr.py:51
+msgid "✅The student successfully deleted"
+msgstr "✅The student successfully deleted"
+
+#: file_cr.py:10
+msgid "🤖The file isn't find"
+msgstr "🤖The file isn't find"
+
+#: file_cr.py:28
+msgid "🔹For deleting this file,Click the button below:"
+msgstr "🔹For deleting this file,Click the button below:"
+
+#: file_cr.py:33
+msgid "🚫Your request for getting all files, failed"
+msgstr "🚫Your request for getting all files, failed"
+
+#: file_cr.py:40
+msgid "🤖For access to a specify file, click on its button:"
+msgstr "🤖For access to a specify file, click on its button:"
+
+#: file_cr.py:51
+msgid "✅The file successfully added to class files"
+msgstr "✅The file successfully added to class files"
+
+#: file_cr.py:58
+msgid "✅The file successfully deleted"
+msgstr "✅The file successfully deleted"
+
+#: group_cr.py:36
+msgid "🤖Your Group successfully registered!"
+msgstr "🤖Your Group successfully registered!"
+
+#: lecture_cr.py:13
+msgid "Add Lecture"
+msgstr "Add Lecture"
+
+#: lecture_cr.py:14
+msgid "Get All Lectures"
+msgstr "Get All Lectures"
+
+#: lecture_cr.py:23
+msgid "🔹Yeah! Now you can add the lecture from this url:"
+msgstr "🔹Yeah! Now you can add the lecture from this url:"
+
+#: lecture_cr.py:29
+msgid "🚫Your request for getting all lectures, failed"
+msgstr "🚫Your request for getting all lectures, failed"
+
+#: lecture_cr.py:33
+msgid "Lecture Name: "
+msgstr "Lecture Name: "
+
+#: lecture_cr.py:33
+msgid ""
+"\n"
+" Phone: "
+msgstr ""
+"\n"
+" Phone: "
+
+#: lecture_cr.py:33
+msgid ""
+"\n"
+" Rate: "
+msgstr ""
+"\n"
+" Rate: "
+
+#: lecture_cr.py:37 lecture_cr.py:51 student_cr.py:31
+msgid "Back"
+msgstr "Back"
+
+#: lecture_cr.py:39
+msgid ""
+"\n"
+"🔹The number of lectures: "
+msgstr ""
+"\n"
+"🔹The number of lectures: "
+
+#: lecture_cr.py:44
+msgid "🚫Your request for getting lecture, failed"
+msgstr "🚫Your request for getting lecture, failed"
+
+#: lecture_cr.py:45
+msgid "Lecture name: "
+msgstr "Lecture name: "
+
+#: lecture_cr.py:45
+msgid ""
+"\n"
+"Phone: "
+msgstr ""
+"\n"
+"Phone: "
+
+#: lecture_cr.py:45
+msgid ""
+"\n"
+"Rate: "
+msgstr ""
+"\n"
+"Rate: "
+
+#: lecture_cr.py:66
+msgid "🔹Yeah! Now you can edit the lecture from this url:"
+msgstr "🔹Yeah! Now you can edit the lecture from this url:"
+
+#: lecture_cr.py:71 lecture_cr.py:76
+msgid "Your vote registed!"
+msgstr "Your vote registed!"
+
+#: lecture_cr.py:89
+msgid "✅The lecture successfully deleted"
+msgstr "✅The lecture successfully deleted"
+
+#: lecture_cr.py:92
+msgid ""
+"🚫You can't delete the lecture because this has already been selected for a "
+"classe"
+msgstr ""
+"🚫You can't delete the lecture because this has already been selected for a "
+"classe"
+
+#: student_cr.py:18
+msgid "🤖Now, you added to this class "
+msgstr "🤖Now, you added to this class "
+
+#: student_cr.py:23
+msgid "🚫Your request for getting all students, failed"
+msgstr "🚫Your request for getting all students, failed"
+
+#: student_cr.py:27 student_cr.py:39
+msgid "Student name: "
+msgstr "Student name: "
+
+#: student_cr.py:27 student_cr.py:39
+msgid ""
+"\n"
+" Username: "
+msgstr ""
+"\n"
+" Username: "
+
+#: student_cr.py:33
+msgid ""
+"\n"
+"🔹The number of students: "
+msgstr ""
+"\n"
+"🔹The number of students: "
+
+#: student_cr.py:38
+msgid "🚫Your request for getting student, failed"
+msgstr "🚫Your request for getting student, failed"

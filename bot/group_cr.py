@@ -2,7 +2,7 @@ import telebot as tb
 from telebot.types import InlineKeyboardButton,InlineKeyboardMarkup
 from shared import dbMig
 from shared.models import Group
-
+from utils import setLanguage
 _=None
 groupIDs=[]
 
@@ -16,10 +16,10 @@ def storeGroupIDs():
 
 def langChoosing(bot:tb,message):
     markup=InlineKeyboardMarkup()
-    persian=InlineKeyboardButton(("فارسی"),callback_data='persian')
-    english=InlineKeyboardButton(("English"),callback_data='english')
+    persian=InlineKeyboardButton("فارسی",callback_data='persian')
+    english=InlineKeyboardButton("English",callback_data='english')
     markup.add(persian,english)
-    bot.send_message(message.chat.id,("🔹Please Select Your Language First:"),reply_markup=markup)
+    bot.send_message(message.chat.id,"🔹Please Select Your Language First:",reply_markup=markup)
 
 def configureGroup(bot:tb,lang,call):
     group=Group(
@@ -29,11 +29,12 @@ def configureGroup(bot:tb,lang,call):
     )
     status= dbMig.addGroup(group)
     if status:
+        _=setLanguage(str(call.message.chat.id))
         markup = InlineKeyboardMarkup()
-        classes = InlineKeyboardButton(('Manage Classes'), callback_data='manage_classes')
-        lectures = InlineKeyboardButton(('Manage Lectures'), callback_data='manage_lectures')
+        classes = InlineKeyboardButton(_('Manage Classes'), callback_data='manage_classes')
+        lectures = InlineKeyboardButton(_('Manage Lectures'), callback_data='manage_lectures')
         markup.add(classes, lectures)
-        bot.send_message(group.groupID,("🤖Your Group successfully registered!"), reply_markup=markup)
+        bot.send_message(group.groupID,_("🤖Your Group successfully registered!"), reply_markup=markup)
 
 
 

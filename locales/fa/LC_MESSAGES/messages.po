@@ -1,0 +1,451 @@
+# Persian translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 21:20+0330\n"
+"PO-Revision-Date: 2025-09-23 21:26+0330\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Persian\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+
+#: bot.py:30
+msgid "✅Lecture successfully added!"
+msgstr "✅درس با موفقیت اضافه شد!"
+
+#: bot.py:33
+msgid "✅Lecture successfully edited!"
+msgstr "✅درس با موفقیت ویرایش شد!"
+
+#: bot.py:36
+msgid "✅Class successfully added!"
+msgstr "✅کلاس با موفقیت اضافه شد!"
+
+#: bot.py:39
+msgid "✅Class successfully edited!"
+msgstr "✅کلاس با موفقیت ویرایش شد!"
+
+#: bot.py:42
+msgid "✅You successfully added to this class!"
+msgstr "✅شما با موفقیت به این کلاس اضافه شدید!"
+
+#: bot.py:45
+msgid "✅your info successfully edited!"
+msgstr "✅اطلاعات شما با موفقیت ویرایش شد!"
+
+#: bot.py:48
+msgid "✅Exam successfully added!"
+msgstr "✅امتحان با موفقیت اضافه شد!"
+
+#: bot.py:51
+msgid "✅Exam successfully edited!"
+msgstr "✅امتحان با موفقیت ویرایش شد!"
+
+#: bot.py:61
+msgid "✅The Reminder successfully activated"
+msgstr "✅یادآور با موفقیت فعال شد"
+
+#: bot.py:69
+msgid "✅The Reminder successfully deactivated"
+msgstr "✅یادآور با موفقیت غیرفعال شد"
+
+#: handlers.py:13
+msgid "🚫Just the owner or admin of the group can do that!"
+msgstr "🚫فقط مالک یا مدیر گروه می‌تواند این کار را انجام دهد!"
+
+#: handlers.py:20
+msgid "welcome to UniNest"
+msgstr "به یونی نست خوش آمدید"
+
+#: handlers.py:24 group_cr.py:33
+msgid "Manage Classes"
+msgstr "مدیریت کلاس‌ها"
+
+#: handlers.py:25 group_cr.py:34
+msgid "Manage Lectures"
+msgstr "مدیریت دروس"
+
+#: handlers.py:27
+msgid "🤖How can i help you?"
+msgstr "🤖چگونه می‌توانم کمکتان کنم؟"
+
+#: handlers.py:34
+msgid "🔹Please send file with caption that include a specific name"
+msgstr "🔹لطفا فایل را با عنوانی که شامل یک نام مشخص است ارسال کنید"
+
+#: handlers.py:34
+msgid ""
+"\n"
+" Like: Booklet of chapter one"
+msgstr ""
+"\n"
+" مانند: جزوه فصل یک"
+
+#: handlers.py:39
+msgid ""
+"🚫You haven't request for adding file!\n"
+"            Go to your class management and create a request for add file"
+msgstr ""
+"🚫شما درخواستی برای افزودن فایل نداشته‌اید!\n"
+"            به بخش مدیریت کلاس خود بروید و یک درخواست برای افزودن فایل ایجاد کنید"
+
+#: handlers.py:46
+msgid "🚫You already have a file with this name! change it and send again"
+msgstr "🚫شما قبلاً یک فایل با این نام دارید! آن را تغییر دهید و دوباره ارسال کنید"
+
+#: handlers.py:104 handlers.py:110
+msgid "You already voted!"
+msgstr "شما قبلاً رأی داده‌اید!"
+
+#: handlers.py:118 handlers.py:145 handlers.py:177 handlers.py:212
+#: handlers.py:239
+msgid "Yes"
+msgstr "بله"
+
+#: handlers.py:119 handlers.py:146 handlers.py:178 handlers.py:213
+#: handlers.py:240
+msgid "No"
+msgstr "خیر"
+
+#: handlers.py:121
+msgid "🔸Are you sure you want to delete the lecture?"
+msgstr "🔸آیا از حذف این درس اطمینان دارید؟"
+
+#: handlers.py:148
+msgid "🔸Are you sure you want to delete the class?"
+msgstr "🔸آیا از حذف این کلاس اطمینان دارید؟"
+
+#: handlers.py:172
+msgid "You already not in this class!"
+msgstr "شما از قبل در این کلاس نیستید!"
+
+#: handlers.py:180
+msgid "🔸Are you sure you want to delete the student?"
+msgstr "🔸آیا از حذف این دانشجو اطمینان دارید؟"
+
+#: handlers.py:215
+msgid "🔸Are you sure you want to delete the exam?"
+msgstr "🔸آیا از حذف این امتحان اطمینان دارید؟"
+
+#: handlers.py:225
+msgid "Cancel adding file"
+msgstr "لغو افزودن فایل"
+
+#: handlers.py:227
+msgid "🔹Please send your file with a specific name in its caption"
+msgstr "🔹لطفا فایل خود را با یک نام مشخص در عنوان آن ارسال کنید"
+
+#: handlers.py:242
+msgid "🔸Are you sure you want to delete the file?"
+msgstr "🔸آیا از حذف این فایل اطمینان دارید؟"
+
+#: handlers.py:266
+msgid "🔸Delete process was canceled"
+msgstr "🔸فرآیند حذف لغو شد"
+
+#: handlers.py:270
+msgid "🔸Adding file process was canceled"
+msgstr "🔸فرآیند افزودن فایل لغو شد"
+
+#: class_cr.py:9
+msgid "Add Class"
+msgstr "افزودن کلاس"
+
+#: class_cr.py:10
+msgid "Get All Classes"
+msgstr "دریافت همه کلاس‌ها"
+
+#: class_cr.py:12 lecture_cr.py:16
+msgid "🤖Select a one of buttons to do that"
+msgstr "🤖برای انجام این کار یکی از دکمه‌ها را انتخاب کنید"
+
+#: class_cr.py:18 class_cr.py:60 exam_cr.py:10 exam_cr.py:16 lecture_cr.py:22
+#: lecture_cr.py:65
+msgid "🚫Error while adding request"
+msgstr "🚫خطا در هنگام افزودن درخواست"
+
+#: class_cr.py:19
+msgid "🔹Yeah! Now you can add the class from this url:"
+msgstr "🔹آره! حالا می‌توانی کلاس را از این لینک اضافه کنی:"
+
+#: class_cr.py:24
+msgid "🚫Your request for getting all classes, failed"
+msgstr "🚫درخواست شما برای دریافت همه کلاس‌ها ناموفق بود"
+
+#: class_cr.py:29 class_cr.py:42
+msgid "Class name: "
+msgstr "نام کلاس: "
+
+#: class_cr.py:29 class_cr.py:42
+msgid ""
+"\n"
+" Lecture: "
+msgstr ""
+"\n"
+" درس: "
+
+#: class_cr.py:33 class_cr.py:53 exam_cr.py:37 file_cr.py:38
+msgid "↩️Back"
+msgstr "↩️بازگشت"
+
+#: class_cr.py:35
+msgid ""
+"\n"
+"🔹The number of classes: "
+msgstr ""
+"\n"
+"🔹تعداد کلاس‌ها: "
+
+#: class_cr.py:40
+msgid "🚫Your request for getting class, failed"
+msgstr "🚫درخواست شما برای دریافت کلاس ناموفق بود"
+
+#: class_cr.py:44 exam_cr.py:47 lecture_cr.py:47 student_cr.py:41
+msgid "Edit"
+msgstr "ویرایش"
+
+#: class_cr.py:45 exam_cr.py:52 file_cr.py:25 lecture_cr.py:48 student_cr.py:42
+msgid "Delete"
+msgstr "حذف"
+
+#: class_cr.py:46
+msgid "📋Exams"
+msgstr "📋امتحان‌ها"
+
+#: class_cr.py:47
+msgid "📋Add Exam"
+msgstr "📋افزودن امتحان"
+
+#: class_cr.py:48
+msgid "💾Add File To Class"
+msgstr "💾افزودن فایل به کلاس"
+
+#: class_cr.py:49
+msgid "💾Get All Files"
+msgstr "💾دریافت همه فایل‌ها"
+
+#: class_cr.py:50
+msgid "🧑‍🎓Add Me As Student"
+msgstr "🧑‍🎓من را به عنوان دانشجو اضافه کن"
+
+#: class_cr.py:51
+msgid "🧑‍🎓Delete Me From Class"
+msgstr "🧑‍🎓من را از کلاس حذف کن"
+
+#: class_cr.py:52
+msgid "🧑‍🎓Get All Students"
+msgstr "🧑‍🎓دریافت همه دانشجویان"
+
+#: class_cr.py:61
+msgid "🔹Yeah! Now you can edit the class from this url:"
+msgstr "🔹آره! حالا می‌توانی کلاس را از این لینک ویرایش کنی:"
+
+#: class_cr.py:71
+msgid "✅The class successfully deleted"
+msgstr "✅کلاس با موفقیت حذف شد"
+
+#: exam_cr.py:11
+msgid "🔹Yeah! Now you can add the exam from this url:"
+msgstr "🔹آره! حالا می‌توانی امتحان را از این لینک اضافه کنی:"
+
+#: exam_cr.py:17
+msgid "🔹Yeah! Now you can edit the exam from this url:"
+msgstr "🔹آره! حالا می‌توانی امتحان را از این لینک ویرایش کنی:"
+
+#: exam_cr.py:29
+msgid "🚫Your request for getting exams, failed"
+msgstr "🚫درخواست شما برای دریافت امتحان‌ها ناموفق بود"
+
+#: exam_cr.py:33 exam_cr.py:45
+msgid "Title: "
+msgstr "عنوان: "
+
+#: exam_cr.py:33
+msgid ""
+"\n"
+" Date: "
+msgstr ""
+"\n"
+" تاریخ: "
+
+#: exam_cr.py:39
+msgid ""
+"\n"
+"🔹The number of exams: "
+msgstr ""
+"\n"
+"🔹تعداد امتحان‌ها: "
+
+#: exam_cr.py:44
+msgid "Your request for getting exam, failed"
+msgstr "درخواست شما برای دریافت امتحان ناموفق بود"
+
+#: exam_cr.py:49
+msgid "🔴DeActive Reminder"
+msgstr "🔴غیرفعال کردن یادآور"
+
+#: exam_cr.py:51
+msgid "🟢Active Reminder"
+msgstr "🟢فعال کردن یادآور"
+
+#: exam_cr.py:62 student_cr.py:51
+msgid "✅The student successfully deleted"
+msgstr "✅دانشجو با موفقیت حذف شد"
+
+#: file_cr.py:10
+msgid "🤖The file isn't find"
+msgstr "🤖فایل پیدا نشد"
+
+#: file_cr.py:28
+msgid "🔹For deleting this file,Click the button below:"
+msgstr "🔹برای حذف این فایل، روی دکمه زیر کلیک کنید:"
+
+#: file_cr.py:33
+msgid "🚫Your request for getting all files, failed"
+msgstr "🚫درخواست شما برای دریافت همه فایل‌ها ناموفق بود"
+
+#: file_cr.py:40
+msgid "🤖For access to a specify file, click on its button:"
+msgstr "🤖برای دسترسی به یک فایل خاص، روی دکمه آن کلیک کنید:"
+
+#: file_cr.py:51
+msgid "✅The file successfully added to class files"
+msgstr "✅فایل با موفقیت به فایل‌های کلاس اضافه شد"
+
+#: file_cr.py:58
+msgid "✅The file successfully deleted"
+msgstr "✅فایل با موفقیت حذف شد"
+
+#: group_cr.py:36
+msgid "🤖Your Group successfully registered!"
+msgstr "🤖گروه شما با موفقیت ثبت شد!"
+
+#: lecture_cr.py:13
+msgid "Add Lecture"
+msgstr "افزودن درس"
+
+#: lecture_cr.py:14
+msgid "Get All Lectures"
+msgstr "دریافت همه دروس"
+
+#: lecture_cr.py:23
+msgid "🔹Yeah! Now you can add the lecture from this url:"
+msgstr "🔹آره! حالا می‌توانی درس را از این لینک اضافه کنی:"
+
+#: lecture_cr.py:29
+msgid "🚫Your request for getting all lectures, failed"
+msgstr "🚫درخواست شما برای دریافت همه دروس ناموفق بود"
+
+#: lecture_cr.py:33
+msgid "Lecture Name: "
+msgstr "نام درس: "
+
+#: lecture_cr.py:33
+msgid ""
+"\n"
+" Phone: "
+msgstr ""
+"\n"
+" تلفن: "
+
+#: lecture_cr.py:33
+msgid ""
+"\n"
+" Rate: "
+msgstr ""
+"\n"
+" امتیاز: "
+
+#: lecture_cr.py:37 lecture_cr.py:51 student_cr.py:31
+msgid "Back"
+msgstr "بازگشت"
+
+#: lecture_cr.py:39
+msgid ""
+"\n"
+"🔹The number of lectures: "
+msgstr ""
+"\n"
+"🔹تعداد دروس: "
+
+#: lecture_cr.py:44
+msgid "🚫Your request for getting lecture, failed"
+msgstr "🚫درخواست شما برای دریافت درس ناموفق بود"
+
+#: lecture_cr.py:45
+msgid "Lecture name: "
+msgstr "نام درس: "
+
+#: lecture_cr.py:45
+msgid ""
+"\n"
+"Phone: "
+msgstr ""
+"\n"
+"تلفن: "
+
+#: lecture_cr.py:45
+msgid ""
+"\n"
+"Rate: "
+msgstr ""
+"\n"
+"امتیاز: "
+
+#: lecture_cr.py:66
+msgid "🔹Yeah! Now you can edit the lecture from this url:"
+msgstr "🔹آره! حالا می‌توانی درس را از این لینک ویرایش کنی:"
+
+#: lecture_cr.py:71 lecture_cr.py:76
+msgid "Your vote registed!"
+msgstr "رأی شما ثبت شد!"
+
+#: lecture_cr.py:89
+msgid "✅The lecture successfully deleted"
+msgstr "✅درس با موفقیت حذف شد"
+
+#: lecture_cr.py:92
+msgid ""
+"🚫You can't delete the lecture because this has already been selected for a "
+"classe"
+msgstr "🚫شما نمی‌توانید این درس را حذف کنید زیرا قبلاً برای یک کلاس انتخاب شده است"
+
+#: student_cr.py:18
+msgid "🤖Now, you added to this class "
+msgstr "🤖حالا شما به این کلاس اضافه شدید "
+
+#: student_cr.py:23
+msgid "🚫Your request for getting all students, failed"
+msgstr "🚫درخواست شما برای دریافت همه دانشجویان ناموفق بود"
+
+#: student_cr.py:27 student_cr.py:39
+msgid "Student name: "
+msgstr "نام دانشجو: "
+
+#: student_cr.py:27 student_cr.py:39
+msgid ""
+"\n"
+" Username: "
+msgstr ""
+"\n"
+" نام کاربری: "
+
+#: student_cr.py:33
+msgid ""
+"\n"
+"🔹The number of students: "
+msgstr ""
+"\n"
+"🔹تعداد دانشجویان: "
+
+#: student_cr.py:38
+msgid "🚫Your request for getting student, failed"
+msgstr "🚫درخواست شما برای دریافت دانشجو ناموفق بود"
