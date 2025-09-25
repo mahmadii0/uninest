@@ -2,4 +2,7 @@ shared/constants.py
 bot/__pycache__
 shared/__pycache__
 webApp/__pycache__
+webApp/classes/__pycache__
+webApp/lectures/__pycache__
+webApp/uninest/__pycache__
 __pycache__
