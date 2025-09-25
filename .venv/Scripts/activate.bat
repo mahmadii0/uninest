@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\lenovo\Desktop\classes_helper\.venv"
+@set "VIRTUAL_ENV=C:\Users\lenovo\Desktop\classes_helper\Uninest\.venv"
 
 @set "VIRTUAL_ENV_PROMPT="
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (

@@ -32,7 +32,7 @@ export-env {
       }
     }
 
-    let virtual_env = 'C:\Users\lenovo\Desktop\classes_helper\.venv'
+    let virtual_env = 'C:\Users\lenovo\Desktop\classes_helper\Uninest\.venv'
     let bin = 'Scripts'
 
     let is_windows = ($nu.os-info.family) == 'windows'

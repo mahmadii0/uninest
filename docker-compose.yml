@@ -1,0 +1,28 @@
+version: "2.38.2"
+
+services:
+  django:
+    build: .
+    container_name: djangoApp
+    command: python webApp/manage.py runserver
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+
+  bot:
+    build: .
+    container_name: botApp
+    command: python bot/bot.py
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: redisServer
+    ports:
+      - "6379:6379"
