@@ -26,12 +26,19 @@ The project integrates a **Django web app** for forms and uses **Redis + Docker*
 
 ## 📂 Project Structure
 uninest/
+
 ├── bot/ # Telegram bot (Telebot)
+
 ├── webApp/ # Django web application
+
 ├── shared/ # Shared utilities & logic
+
 ├── locales/ # Translation files
+
 ├── docker-compose.yml
+
 ├── Dockerfile
+
 └── requirements.txt
 
 ---
@@ -131,13 +138,21 @@ docker-compose up --build
 ```
 ### 4. Start Bot
 - Once containers are running, start the bot and web app:
+  
     Bot: listens for group & private messages
+  
     Web app: forms accessible at http://localhost:8000
+  
     redis: listen at port 6379
+  
     mysql: listen at port 3307(because on my machine, the mysql engine already listen at port 3306)
 ### 🤝 Contributing
 1.Fork the repo
+
 2.Create a feature branch (git checkout -b feature-name)
+
 3.Commit changes (git commit -m "Add feature")
+
 4.Push branch (git push origin feature-name)
+
 5.Open a Pull Request
