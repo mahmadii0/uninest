@@ -23,7 +23,7 @@ def reminderMessage(bot,students,exam):
     for student in students:
         bot.send_message(student[2], _(f"📅Reminder \n Your {exam[1]} exam is on {exam[3]}"))
 
-r = redis.Redis(host="localhost", port=6379, db=0)
+r = redis.Redis(host="redis", port=6379, db=0)
 pubsub = r.pubsub()
 pubsub.subscribe("uninest")
 

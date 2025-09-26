@@ -1,28 +1,58 @@
-version: "2.38.2"
+version: "3.9"
 
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysqlServer
+    restart: always
+    environment:
+      MYSQL_DATABASE: uninest
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 12341234
+      MYSQL_ROOT_PASSWORD: root_pass
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      retries: 10
+      start_period: 30s
+      timeout: 10s
+
+  redis:
+    image: redis:latest
+    container_name: redisServer
+    restart: always
+    ports:
+      - "6379:6379"
+
   django:
     build: .
     container_name: djangoApp
-    command: python webApp/manage.py runserver
+    command: python webApp/manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     volumes:
       - .:/app
     depends_on:
       - redis
+      - mysql
 
   bot:
     build: .
     container_name: botApp
-    command: python bot/bot.py
+    command: bash -c "sleep 15 && python bot/bot.py"
     volumes:
       - .:/app
     depends_on:
-      - redis
+      redis:
+        condition: service_started
+      mysql:
+        condition: service_healthy
 
-  redis:
-    image: redis:latest
-    container_name: redisServer
-    ports:
-      - "6379:6379"
+volumes:
+  mysql_data:
+
